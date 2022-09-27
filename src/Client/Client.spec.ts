@@ -2,6 +2,7 @@ import 'mocha';
 import { Client } from './Client';
 import {expect} from "chai";
 import {Wallet} from "../primitives/Wallet";
+import {Mnemonic} from "../primitives";
 
 describe('Client', () => {
     let client: Client;
@@ -10,7 +11,8 @@ describe('Client', () => {
         expect(client).to.exist;
     });
     it('should create a wallet', function () {
-        const wallet = client.createWallet();
+        const mnemonic = new Mnemonic();
+        const wallet = client.createWallet(mnemonic);
         expect(wallet).to.exist;
         expect(wallet.constructor).to.equal(Wallet);
     });
