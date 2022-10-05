@@ -33,3 +33,8 @@ const author = client.providers.marketplaceAPI.getAuthor(item.author);
 - `account.mintItem(item)` - Allow to create a new item of type NFT.
 - `account.getItem({id})` - Allow to get a specific item
 - `account.findItem({syntax})`
+
+## Items
+
+Items images can be found at {SERVER_URI}/images/{item.filename}. eg: `http://localhost:3001/images/82f182ddbef3d7b80bafc06ee9e4a664.png`  
+Where filename is md5.

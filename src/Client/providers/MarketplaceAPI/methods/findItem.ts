@@ -1,12 +1,14 @@
 import Axios from "axios";
 
-export default async function findItem(searchParams){
-    console.log('Find Item for search', searchParams);
 
-    // @ts-ignore
-    const {endpoint} = this;
+export interface FindItemParams {
+    author?: string,
+    title?: string,
+    genre?: string,
+}
 
-    const url = `${endpoint.url}/item/${itemIdentifier}`;
+export default async function findItem(findParams: FindItemParams){
+    console.log('Find Item for search', findParams);
 
-    return Axios.get(url);
+    console.log({findParams})
 };
