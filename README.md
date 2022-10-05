@@ -36,5 +36,6 @@ const author = client.providers.marketplaceAPI.getAuthor(item.author);
 
 ## Items
 
-Items images can be found at {SERVER_URI}/images/{item.filename}. eg: `http://localhost:3001/images/82f182ddbef3d7b80bafc06ee9e4a664.png`  
+Items images can be found at {SERVER_URI}/images/{item.filename}. eg: `http://localhost:3001/images/82f182ddbef3d7b80bafc06ee9e4a664.png`   
+SERVER_URL is specified in MarketplaceAPI.endpoint.images_url.  
 Where filename is md5.

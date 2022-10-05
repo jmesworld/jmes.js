@@ -4,7 +4,7 @@ export default async function getAllItems(){
     // @ts-ignore
     const {endpoint} = this;
 
-    const url = `${endpoint.url}/items`;
+    const url = `${endpoint.api_url}/items`;
 
     return Axios.get(url);
 };

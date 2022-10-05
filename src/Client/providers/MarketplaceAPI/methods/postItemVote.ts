@@ -11,7 +11,7 @@ export default async function postItemVote(itemVoteParams: ItemVoteParams){
     const {endpoint} = this;
     const { identifier, direction, userIdentifier } = itemVoteParams;
 
-    const url = `${endpoint.url}/item/${identifier}/vote`;
+    const url = `${endpoint.api_url}/item/${identifier}/vote`;
 
     return Axios.post(url, { direction, userIdentifier });
 };

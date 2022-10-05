@@ -6,7 +6,7 @@ export default async function getItem(itemIdentifier: string){
     // @ts-ignore
     const {endpoint} = this;
 
-    const url = `${endpoint.url}/item/${itemIdentifier}`;
+    const url = `${endpoint.api_url}/item/${itemIdentifier}`;
 
     return Axios.get(url);
 };

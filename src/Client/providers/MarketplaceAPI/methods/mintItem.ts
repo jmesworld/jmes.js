@@ -14,7 +14,7 @@ export interface MintItemParams {
 export default async function mintItem(mintParams: MintItemParams){
     // @ts-ignore
     const {endpoint} = this;
-    const url = `${endpoint.url}/item`;
+    const url = `${endpoint.api_url}/item`;
 
     console.log({mintParams});
 

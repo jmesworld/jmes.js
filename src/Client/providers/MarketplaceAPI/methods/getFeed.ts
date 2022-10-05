@@ -6,7 +6,7 @@ export default async function getFeed(){
     // @ts-ignore
     const {endpoint} = this;
 
-    const url = `${endpoint.url}/feed`;
+    const url = `${endpoint.api_url}/feed`;
 
     return Axios.get(url);
 };

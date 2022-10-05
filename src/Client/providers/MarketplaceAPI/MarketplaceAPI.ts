@@ -20,11 +20,12 @@ export default class MarketplaceAPI {
     public mintItem!: (mintParams: MintItemParams) => Promise<any>;
     public postItemOffer!: (itemOfferParams: ItemOfferParams) => Promise<any>;
     public postItemVote!: (itemVoteParams: ItemVoteParams) => Promise<any>;
-    private endpoint: { url: string };
+    private endpoint: { api_url: string, images_url: string };
     constructor() {
 
         this.endpoint = {
-            url: 'http://localhost:3001'
+            api_url: 'http://localhost:3001',
+            images_url: 'http://localhost:3001/images'
         }
     }
 };

@@ -4,7 +4,7 @@ export default async function getAuthors(){
 // @ts-ignore
     const {endpoint} = this;
 
-    const url = `${endpoint.url}/authors`;
+    const url = `${endpoint.api_url}/authors`;
 
     return Axios.get(url);
 };

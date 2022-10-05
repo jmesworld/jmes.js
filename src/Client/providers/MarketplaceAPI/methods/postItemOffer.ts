@@ -11,7 +11,7 @@ export default async function postItemOffer(itemOfferParams: ItemOfferParams){
     const {endpoint} = this;
     const { identifier, price } = itemOfferParams;
 
-    const url = `${endpoint.url}/item/${identifier}/offer`;
+    const url = `${endpoint.api_url}/item/${identifier}/offer`;
 
     return Axios.post(url, { price });
 };
