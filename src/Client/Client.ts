@@ -1,22 +1,16 @@
 import { Wallet } from '../primitives/Wallet';
-import {Mnemonic} from "primitives";
-import {APIFactory} from "./API";
+import {Mnemonic} from "../primitives/Mnemonic/Mnemonic";
+import {DerivableKey} from "../primitives/DerivableKey/DerivableKey";
 import MarketplaceAPI from "./providers/MarketplaceAPI/marketplaceAPI";
 import IdentityAPI from "./providers/IdentityAPI/IdentityAPI";
 
 export class Client {
-    public api: APIFactory;
     public providers: {
         marketplaceAPI: MarketplaceAPI,
         identityAPI: IdentityAPI,
     };
 
     constructor() {
-        this.api = new APIFactory({
-            chainID: 'default',
-            URL:''
-        });
-
         // Specific provider to external services
         this.providers = {
             marketplaceAPI: new MarketplaceAPI(),
@@ -24,8 +18,18 @@ export class Client {
         }
     }
 
-    public createWallet(key: Mnemonic){
-        console.log(key);
-        return new Wallet();
+    public createWallet(key: Mnemonic|DerivableKey){
+        // Where 8888 is specific JMES Path for mainnet.
+        const bip44Path = `m/44'/330'`;
+
+        console.log(`Generating a new wallet with key on BIP Path ${bip44Path}`);
+
+        // If it's a mnemonic based key, we create a derivableKey first.
+        // @ts-ignore
+        let derivableKey = (key.toSeed) ? new DerivableKey(key.toSeed()) : key;
+
+        // @ts-ignore
+        const chainDerivedKey = derivableKey.derivePath(bip44Path);
+        return  new Wallet(chainDerivedKey);
     }
 }

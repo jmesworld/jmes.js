@@ -52,7 +52,15 @@
 // // }
 // // return acc;
 
+import {DerivableKey} from "../DerivableKey";
 export class Account {
-    constructor() {
+    private derivableAccountKey: DerivableKey;
+    private index: number;
+    constructor(key: DerivableKey, index: number) {
+        this.derivableAccountKey = key.derivePath(`${index}'`);
+        this.index = index;
+    }
+    getAddress(index: number=0){
+        return this.derivableAccountKey.derivePath(`m/0/${index}`).toAddress();
     }
 };

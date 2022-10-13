@@ -3,6 +3,12 @@
 Javascript developer library to interact with JMES Network
 
 
+## Some considerations 
+
+We define a Wallet as a primitives that is initiated from a root private key   
+A Wallet can be derived into multiple Account (that have individual public/private key pair).    
+
+
 ## Client
 
 ```js
@@ -12,11 +18,15 @@ const mnemonic = new Mnemonic();
 
 // Initiate a wallet from a specific mnemonic or private key
 const wallet = client.createWallet(mnemonic);
+// Each wallet allow to generate multiple account, by default, it will be index 0. 
+const account = wallet.getAccount();
+
+// Get an account's Address on jmesxxxx format.  
+const address = account.getAddress();
 
 // Sign and broadcast a transaction
 const signedMessage = wallet.signMessage({});
 const txid = wallet.broadcastSignedMessage(signedMessage);
-
 
 // Get feed
 const feed = client.providers.marketplaceAPI.getFeed();

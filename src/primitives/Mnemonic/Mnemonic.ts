@@ -13,8 +13,8 @@ export class Mnemonic {
         const mnemonic = ethers.utils.entropyToMnemonic(randomBytes);
         return mnemonic;
     }
-    static async mnemonicToSeed(mnemonic: string) {
-        const seed = await bip39.mnemonicToSeedSync(mnemonic);
+    static mnemonicToSeed(mnemonic: string) {
+        const seed = bip39.mnemonicToSeedSync(mnemonic);
         return seed.toString('hex');
     }
 
