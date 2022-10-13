@@ -32,10 +32,12 @@ var Mnemonic = /** @class */ (function () {
         this.mnemonic = (mnemonic) ? mnemonic : Mnemonic.generateMnemonic();
     }
     // @ts-ignore
-    Mnemonic.generateMnemonic = function (getRandomValuesFn) {
-        if (getRandomValuesFn === void 0) { getRandomValuesFn = (crypto && crypto.webcrypto) ? crypto.webcrypto.getRandomValues : crypto.getRandomValues; }
+    Mnemonic.generateMnemonic = function (overwroteRandomBytes) {
+        if (overwroteRandomBytes === void 0) { overwroteRandomBytes = null; }
+        var getRandomValuesFn = (crypto && crypto.webcrypto) ? crypto.webcrypto.getRandomValues : crypto.getRandomValues;
         var uintArray = new Uint8Array(32);
-        var randomBytes = getRandomValuesFn(uintArray);
+        var randomBytes = (overwroteRandomBytes !== null) ? overwroteRandomBytes : getRandomValuesFn(uintArray);
+        // @ts-ignore
         var mnemonic = ethers_1.ethers.utils.entropyToMnemonic(randomBytes);
         return mnemonic;
     };

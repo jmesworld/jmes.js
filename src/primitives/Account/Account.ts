@@ -57,7 +57,7 @@ export class Account {
     private derivableAccountKey: DerivableKey;
     private index: number;
     constructor(key: DerivableKey, index: number) {
-        this.derivableAccountKey = key.derivePath(`${index}'`);
+        this.derivableAccountKey = key.derivePath(`m/${index}'`);
         this.index = index;
     }
     getAddress(index: number=0){

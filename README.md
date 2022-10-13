@@ -63,6 +63,18 @@ const author = client.providers.marketplaceAPI.getAuthor(item.author);
 - `account.getItem({id})` - Allow to get a specific item
 - `account.findItem({syntax})`
 
+## Usage on React-Native
+
+While this library will handle secpk1256 generation, upon creating a new Mnemonic, it might causes some issues despite overwritting `crypto` module.  
+If so, you can pass specific bytes to the Mnemonic function.   
+
+```js
+import 'react-native-get-random-values'
+const randomBytes = crypto.getRandomValues(new Uint8Array(32));
+const mnemonic = Mnemonic.generateMnemonic(randomBytes);
+```
+
+
 ## Items
 
 Items images can be found at {SERVER_URI}/images/{item.filename}. eg: `http://localhost:3001/images/82f182ddbef3d7b80bafc06ee9e4a664.png`   

@@ -22,13 +22,12 @@
   },
   "homepage": "https://github.com/jmesworld/jmes.js#readme",
   "dependencies": {
+    "@scure/bip32": "^1.1.1",
     "axios": "^0.27.2",
     "bech32": "^2.0.0",
-    "bip32": "^3.1.0",
     "bip39": "^3.0.4",
     "decimal.js": "^10.4.0",
-    "ethers": "^5.6.9",
-    "tiny-secp256k1": "^2.2.1"
+    "ethers": "^5.6.9"
   },
   "devDependencies": {
     "@types/chai": "^4.3.1",

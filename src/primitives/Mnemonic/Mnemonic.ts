@@ -6,12 +6,15 @@ export class Mnemonic {
     mnemonic: string;
 
     // @ts-ignore
-    static generateMnemonic(getRandomValuesFn = (crypto && crypto.webcrypto) ? crypto.webcrypto.getRandomValues : crypto.getRandomValues){
+    static generateMnemonic(overwroteRandomBytes = null){
+        const getRandomValuesFn = (crypto && crypto.webcrypto) ? crypto.webcrypto.getRandomValues : crypto.getRandomValues
         const uintArray = new Uint8Array(32);
-        const randomBytes = getRandomValuesFn(uintArray);
+        const randomBytes = (overwroteRandomBytes !== null) ? overwroteRandomBytes : getRandomValuesFn(uintArray);
+        // @ts-ignore
         const mnemonic = ethers.utils.entropyToMnemonic(randomBytes);
         return mnemonic;
     }
+
     static mnemonicToSeed(mnemonic: string) {
         const seed = bip39.mnemonicToSeedSync(mnemonic);
         return seed.toString('hex');

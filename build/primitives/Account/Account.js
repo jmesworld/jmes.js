@@ -56,7 +56,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Account = void 0;
 var Account = /** @class */ (function () {
     function Account(key, index) {
-        this.derivableAccountKey = key.derivePath("".concat(index, "'"));
+        this.derivableAccountKey = key.derivePath("m/".concat(index, "'"));
         this.index = index;
     }
     Account.prototype.getAddress = function (index) {
