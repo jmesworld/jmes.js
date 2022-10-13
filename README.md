@@ -3,11 +3,30 @@
 Javascript developer library to interact with JMES Network
 
 
+## Install
+
+### ES5/ES6 via NPM
+
+In order to use this library, you will need to add it to your project as a dependency.
+
+Having [NodeJS](https://nodejs.org/) installed:   
+
+```sh
+npm install jmes
+```
+
+### CDN Standalone
+
+For browser usage, you can also directly rely on unpkg :
+
+```
+<script src="https://unpkg.com/jmes"></script>
+```
+
 ## Some considerations 
 
 We define a Wallet as a primitives that is initiated from a root private key   
 A Wallet can be derived into multiple Account (that have individual public/private key pair).    
-
 
 ## Client
 

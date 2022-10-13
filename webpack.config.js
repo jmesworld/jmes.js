@@ -5,6 +5,9 @@ const webConfig =  {
     devtool: 'source-map',
     mode: 'production',
     target: 'web',
+    experiments: {
+        asyncWebAssembly: true,
+    },
     resolve: {
         extensions: ['.ts', '.js', '.json'],
         fallback: {
