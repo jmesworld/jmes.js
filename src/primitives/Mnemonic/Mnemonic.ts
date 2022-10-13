@@ -5,11 +5,10 @@ import * as bip39 from 'bip39';
 export class Mnemonic {
     mnemonic: string;
 
-    static generateMnemonic(){
-        // @ts-ignore
-        const getRandomValuesFn = (crypto && crypto.webcrypto) ? crypto.webcrypto.getRandomValues : crypto.getRandomValues;
-
-        const randomBytes = getRandomValuesFn(new Uint8Array(32));
+    // @ts-ignore
+    static generateMnemonic(getRandomValuesFn = (crypto && crypto.webcrypto) ? crypto.webcrypto.getRandomValues : crypto.getRandomValues){
+        const uintArray = new Uint8Array(32);
+        const randomBytes = getRandomValuesFn(uintArray);
         const mnemonic = ethers.utils.entropyToMnemonic(randomBytes);
         return mnemonic;
     }

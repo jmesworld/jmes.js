@@ -31,10 +31,11 @@ var Mnemonic = /** @class */ (function () {
     function Mnemonic(mnemonic) {
         this.mnemonic = (mnemonic) ? mnemonic : Mnemonic.generateMnemonic();
     }
-    Mnemonic.generateMnemonic = function () {
-        // @ts-ignore
-        var getRandomValuesFn = (crypto && crypto.webcrypto) ? crypto.webcrypto.getRandomValues : crypto.getRandomValues;
-        var randomBytes = getRandomValuesFn(new Uint8Array(32));
+    // @ts-ignore
+    Mnemonic.generateMnemonic = function (getRandomValuesFn) {
+        if (getRandomValuesFn === void 0) { getRandomValuesFn = (crypto && crypto.webcrypto) ? crypto.webcrypto.getRandomValues : crypto.getRandomValues; }
+        var uintArray = new Uint8Array(32);
+        var randomBytes = getRandomValuesFn(uintArray);
         var mnemonic = ethers_1.ethers.utils.entropyToMnemonic(randomBytes);
         return mnemonic;
     };
