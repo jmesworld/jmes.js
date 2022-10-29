@@ -7,8 +7,12 @@ export class Mnemonic {
 
     // @ts-ignore
     static generateMnemonic(overwroteRandomBytes = null){
-        const getRandomValuesFn = (crypto && crypto.webcrypto) ? crypto.webcrypto.getRandomValues : crypto.getRandomValues
+        const getRandomValuesFn = (crypto && crypto.webcrypto)
+            // FIX: Binding done to fix specific issue with nodev18 (https://github.com/cloudflare/miniflare/pull/216)
+            ? crypto.webcrypto.getRandomValues.bind(crypto.webcrypto)
+            : crypto.getRandomValues
         const uintArray = new Uint8Array(32);
+        // @ts-ignore
         const randomBytes = (overwroteRandomBytes !== null) ? overwroteRandomBytes : getRandomValuesFn(uintArray);
         // @ts-ignore
         const mnemonic = ethers.utils.entropyToMnemonic(randomBytes);
