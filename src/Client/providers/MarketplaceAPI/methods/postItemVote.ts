@@ -2,16 +2,24 @@ import Axios from "axios";
 
 export interface ItemVoteParams {
     identifier: string,
-    userIdentifier: string,
     direction: number,
 }
 
-export default async function postItemVote(itemVoteParams: ItemVoteParams){
+export default async function postItemVote(itemVoteParams: ItemVoteParams, optionalProps: any){
     // @ts-ignore
     const {endpoint} = this;
-    const { identifier, direction, userIdentifier } = itemVoteParams;
+    const { identifier, direction } = itemVoteParams;
 
     const url = `${endpoint.api_url}/item/${identifier}/vote`;
 
-    return Axios.post(url, { direction, userIdentifier });
+
+    let config = {
+        headers: {}
+    }
+    if(optionalProps.token){
+        // @ts-ignore
+        config.headers['Authorization'] = `Bearer ${optionalProps.token}`;
+    }
+
+    return Axios.post(url, { direction }, config);
 };

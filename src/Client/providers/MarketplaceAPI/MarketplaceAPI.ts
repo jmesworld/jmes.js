@@ -13,14 +13,15 @@ import {default as postItemVote, ItemVoteParams} from "./methods/postItemVote";
 export default class MarketplaceAPI {
     public getAuthor!: () => Promise<any>;
     public getAuthors!: () => Promise<any>;
-    public getFeed!: () => Promise<any>;
+    public getFeed!: (props: any) => Promise<any>;
     public getItem!: (itemIdentifier: string) => Promise<any>;
     public getAllItems!: () => Promise<any>;
     public findItem!: (findParams: FindItemParams) => Promise<any>;
     public mintItem!: (mintParams: MintItemParams) => Promise<any>;
     public postItemOffer!: (itemOfferParams: ItemOfferParams) => Promise<any>;
-    public postItemVote!: (itemVoteParams: ItemVoteParams) => Promise<any>;
-    private endpoint: { api_url: string, images_url: string };
+    public postItemVote!: (itemVoteParams: ItemVoteParams, optionalProps: any) => Promise<any>;
+    // TODO: make me private later
+    public endpoint: { api_url: string, images_url: string };
     constructor() {
 
         this.endpoint = {
