@@ -31,5 +31,14 @@ export class DerivableKey{
         const node = HDKey.fromMasterSeed(Buffer.from(this.privateKey, 'hex'));
         return Buffer.from(node.publicKey).toString('hex');
     }
+    sign(message: any){
+        const node = HDKey.fromMasterSeed(Buffer.from(this.privateKey, 'hex'));
+        console.log({message})
+        return node.sign(message)
+    }
+    verify(signature: any){
+        const node = HDKey.fromMasterSeed(Buffer.from(this.privateKey, 'hex'));
+        return node.verify(signature);
+    }
 
 }
