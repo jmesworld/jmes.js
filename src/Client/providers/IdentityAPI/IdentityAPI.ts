@@ -1,4 +1,5 @@
 import getIdentity from "./methods/getIdentity";
+import getToken from "./methods/getToken";
 import createIdentity from "./methods/createIdentity";
 import {AxiosResponse} from "axios";
 /**
@@ -6,7 +7,8 @@ import {AxiosResponse} from "axios";
  */
 export default class IdentityAPI {
     public getIdentity!: (identityName: string) => Promise<AxiosResponse<any>>;
-    public createIdentity!: () => Promise<any>;
+    public getToken!: (account: any) => Promise<AxiosResponse<any>>;
+    public createIdentity!: (identityName: string, account: any) => Promise<any>;
 
     private endpoint: { url: string };
     constructor() {
@@ -18,4 +20,5 @@ export default class IdentityAPI {
 };
 
 IdentityAPI.prototype.getIdentity = getIdentity;
+IdentityAPI.prototype.getToken = getToken;
 IdentityAPI.prototype.createIdentity = createIdentity;
