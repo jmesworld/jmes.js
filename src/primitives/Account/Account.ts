@@ -53,6 +53,9 @@
 // // return acc;
 
 import {DerivableKey} from "../DerivableKey";
+import * as elliptic from "elliptic";
+import {bech32} from "bech32";
+
 export class Account {
     private derivableAccountKey: DerivableKey;
     private index: number;
@@ -68,5 +71,23 @@ export class Account {
     }
     getPublic(index: number=0){
         return this.derivableAccountKey.derivePath(`m/0/${index}`).toPublic();
+    }
+    signMessage(message: any, index: number = 0){
+        const privateKey = this.getPrivate(index).toPrivate();
+        const ec = new elliptic.ec('secp256k1');
+        const key = ec.keyFromPrivate(privateKey);
+        return key.sign(message.toString()).toDER('hex');;
+    }
+    verifySignature(signature: any, message: any, publicKey: any){
+        const ec = new elliptic.ec('secp256k1');
+        let isValid = false;
+        if(!publicKey){
+            throw new Error('Expected publicKey');
+        }
+        // We verify a publicKey
+       const pubKey = ec.keyFromPublic(publicKey, 'hex');
+       isValid = pubKey.verify(message.toString(), Buffer.from(signature, 'hex'));
+
+       return isValid;
     }
 };
