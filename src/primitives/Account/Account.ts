@@ -66,4 +66,7 @@ export class Account {
     getPrivate(index: number=0){
         return this.derivableAccountKey.derivePath(`m/0/${index}`);
     }
+    getPublic(index: number=0){
+        return this.derivableAccountKey.derivePath(`m/0/${index}`).toPublic();
+    }
 };
