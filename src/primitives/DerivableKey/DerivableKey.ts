@@ -20,7 +20,16 @@ export class DerivableKey{
     }
     toAddress(){
         const node = HDKey.fromMasterSeed(Buffer.from(this.privateKey, 'hex'));
+        // Note: Identifier is equals to pubKeyHash. You cannot go back to public key from it.
         return bech32.encode('jmes', bech32.toWords(node.identifier));
+    }
+    toPrivate(){
+        const node = HDKey.fromMasterSeed(Buffer.from(this.privateKey, 'hex'));
+        return Buffer.from(node.privateKey).toString('hex');
+    }
+    toPublic(){
+        const node = HDKey.fromMasterSeed(Buffer.from(this.privateKey, 'hex'));
+        return Buffer.from(node.publicKey).toString('hex');
     }
 
 }
