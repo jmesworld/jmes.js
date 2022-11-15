@@ -1,6 +1,9 @@
 import * as crypto from "crypto";
 import { ethers } from "ethers";
 import * as bip39 from 'bip39';
+import {DerivableKey} from "../DerivableKey";
+import * as bip32 from "@scure/bip32";
+import { JMES_COIN_TYPE } from "../../CONSTANTS";
 
 export class Mnemonic {
     mnemonic: string;
@@ -20,8 +23,7 @@ export class Mnemonic {
     }
 
     static mnemonicToSeed(mnemonic: string) {
-        const seed = bip39.mnemonicToSeedSync(mnemonic);
-        return seed.toString('hex');
+        return bip39.mnemonicToSeedSync(mnemonic);
     }
 
     constructor(mnemonic?: string) {
@@ -29,5 +31,11 @@ export class Mnemonic {
     }
     toSeed(){
         return Mnemonic.mnemonicToSeed(this.mnemonic);
+    }
+    // @ts-ignore
+    toMasterDerivableKey(opts = { account: 0, index: 0}){
+        const seed: Buffer = this.toSeed()
+        const masterKey = bip32.HDKey.fromMasterSeed(seed);
+        return new DerivableKey(masterKey)
     }
 };

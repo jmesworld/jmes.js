@@ -1,44 +1,43 @@
-const { HDKey } = require("@scure/bip32");
+import { sha256, ripemd160 } from '../../Client/providers/LCDClient/util/hash';
 
 import {bech32} from "bech32";
-export class DerivableKey{
-    private privateKey: any;
+import { HDKey } from '@scure/bip32';
+import * as elliptic from "elliptic";
 
-    constructor(privateKey: any|null) {
-        this.privateKey = (privateKey !== null) ? privateKey : null;
+export class DerivableKey {
+    private privateKey: Buffer;
+    private hdKey: any;
 
-        if(privateKey){
-            this.privateKey = privateKey;
-        }
+    // @ts-ignore
+    constructor(hdKey: HDKey) {
+        //@ts-ignore
+        const buffPrivKey = Buffer.from(hdKey.privateKey);
+        this.privateKey = buffPrivKey;
+        this.hdKey = hdKey;
     }
 
     derivePath(path: string){
-        console.log('Derive path', path)
-        const node = HDKey.fromMasterSeed(Buffer.from(this.privateKey, 'hex'));
-        const child = node.derive(path);
-        return new DerivableKey(Buffer.from(child.privateKey).toString('hex'))
+        const derivedHD = this.hdKey.derive(path);
+        return new DerivableKey(derivedHD)
     }
     toAddress(){
-        const node = HDKey.fromMasterSeed(Buffer.from(this.privateKey, 'hex'));
-        // Note: Identifier is equals to pubKeyHash. You cannot go back to public key from it.
-        return bech32.encode('jmes', bech32.toWords(node.identifier));
+        const hash = ripemd160(sha256(this.toPublic()));
+        return bech32.encode('jmes', bech32.toWords(hash));
     }
     toPrivate(){
-        const node = HDKey.fromMasterSeed(Buffer.from(this.privateKey, 'hex'));
-        return Buffer.from(node.privateKey).toString('hex');
+        return this.privateKey;
     }
-    toPublic(){
-        const node = HDKey.fromMasterSeed(Buffer.from(this.privateKey, 'hex'));
-        return Buffer.from(node.publicKey).toString('hex');
+    toPublic(): Buffer {
+        const ec = new elliptic.ec('secp256k1');
+        const key = ec.keyFromPrivate(this.toPrivate());
+        const publicKey = key.getPublic(true,'hex');
+        return Buffer.from(publicKey,'hex');
     }
-    sign(message: any){
-        const node = HDKey.fromMasterSeed(Buffer.from(this.privateKey, 'hex'));
-        console.log({message})
-        return node.sign(message)
+    sign(message: any): Buffer {
+        return this.hdKey.sign(message)
     }
     verify(signature: any){
-        const node = HDKey.fromMasterSeed(Buffer.from(this.privateKey, 'hex'));
-        return node.verify(signature);
+        return this.hdKey.verify(signature);
     }
 
 }

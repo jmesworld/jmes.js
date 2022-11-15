@@ -7,12 +7,8 @@ export class Wallet {
         this.chainDerivedKey = chainDerivedKey;
     }
 
-    // getAccount(privateKey, index:number=0){
     getAccount(index:number=0){
-        console.log(`GET ACCOUNT ${index}`)
         return new Account(this.chainDerivedKey, index);
-        // this._privateKey = privateKey;
-        // return new Account(, index)
     }
 
     signMessage(message: any){

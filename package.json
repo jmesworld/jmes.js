@@ -23,12 +23,16 @@
   "homepage": "https://github.com/jmesworld/jmes.js#readme",
   "dependencies": {
     "@scure/bip32": "^1.1.1",
+    "@terra-money/legacy.proto": "npm:@terra-money/terra.proto@^0.1.7",
+    "@terra-money/terra.proto": "^2.1.0",
     "axios": "^0.27.2",
     "bech32": "^2.0.0",
+    "bip32": "^3.1.0",
     "bip39": "^3.0.4",
     "decimal.js": "^10.4.0",
     "elliptic": "^6.5.4",
-    "ethers": "^5.6.9"
+    "ethers": "^5.6.9",
+    "jscrypto": "^1.0.3"
   },
   "devDependencies": {
     "@types/chai": "^4.3.1",
