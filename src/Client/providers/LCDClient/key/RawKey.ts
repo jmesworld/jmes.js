@@ -30,6 +30,10 @@ export class RawKey extends Key {
     ));
     // @ts-ignore
     const sign = key.sign(hash,'hex',{canonical: true})
+    // @ts-ignore
+    const r = sign.r.toArrayLike(Uint8Array, 'be', 32)
+    // @ts-ignore
+    const s = sign.s.toArrayLike(Uint8Array, 'be', 32)
     return {
       //@ts-ignore
       signature:Uint8Array.from(Buffer.concat([r,s])),
