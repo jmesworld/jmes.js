@@ -64,9 +64,9 @@ export class Account {
         }
 
         const lcdc = new LCDClient({
-            // chainID: 'jmes-888',
-            chainID: 'testing',
-            URL: 'http://localhost:1317',
+            chainID: 'jmes-888',
+            // chainID: 'testing',
+            URL: 'http://51.38.52.37:1317',
             isClassic: true
         });
 

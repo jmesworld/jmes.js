@@ -14,7 +14,7 @@ export default class IdentityAPI {
     constructor() {
 
         this.endpoint = {
-            url: 'http://localhost:3001'
+            url: 'http://51.38.52.37:3001'
         }
     }
 };

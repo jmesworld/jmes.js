@@ -25,8 +25,8 @@ export default class MarketplaceAPI {
     constructor() {
 
         this.endpoint = {
-            api_url: 'http://localhost:3001',
-            images_url: 'http://localhost:3001/images'
+            api_url: 'http://51.38.52.37:3001',
+            images_url: 'http://51.38.52.37:3001/images'
         }
     }
 };
