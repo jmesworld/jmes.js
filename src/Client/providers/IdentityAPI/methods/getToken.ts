@@ -6,7 +6,7 @@ export default async function getToken(account: any){
     const ts = +new Date();
 
     const message = ts.toString();
-    const signature = account.signMessage(message);
+    const signature = account.signMessage(message).toString('hex');
     const address = account.getAddress();
     // @ts-ignore
     const {endpoint} = this;
@@ -14,7 +14,7 @@ export default async function getToken(account: any){
 
 
     const url = `${endpoint.url}/identity/token`;
-    console.log({url});
+    console.log({url}, {signature, ts, address});
     // const signature = '123abc';
     // @ts-ignore
 

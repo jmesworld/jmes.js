@@ -31,10 +31,10 @@ export class Account {
         const privateKey = this.getPrivate(index);
         const ec = new elliptic.ec('secp256k1');
         const key = ec.keyFromPrivate(privateKey);
-        const sign = key.sign(message.toString()).toDER('hex');
+        const sign = key.sign(message.toString()).toDER()
 
         // @ts-ignore
-        return Buffer.from(Uint8Array.from(sign));
+        return Buffer.from(sign);
     }
     verifySignature(signature: any, message: any, publicKey: any){
         const ec = new elliptic.ec('secp256k1');

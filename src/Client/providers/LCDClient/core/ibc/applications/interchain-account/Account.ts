@@ -1,5 +1,5 @@
 import { InterchainAccount as InterchainAccount_pb } from '@terra-money/terra.proto/ibc/applications/interchain_accounts/v1/account';
-import { BaseAccount } from '../../../..';
+import { BaseAccount } from '../../../';
 import { JSONSerializable } from '../../../../util/json';
 
 /**
@@ -10,9 +10,9 @@ export class InterchainAccount extends JSONSerializable<
     InterchainAccount.Data,
     InterchainAccount.Proto
 > {
-    /** 
-     * @param base_account 
-     * @param account_owner 
+    /**
+     * @param base_account
+     * @param account_owner
      */
     constructor(
         public base_account: BaseAccount | undefined,

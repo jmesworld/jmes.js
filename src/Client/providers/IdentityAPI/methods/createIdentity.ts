@@ -15,5 +15,5 @@ export default async function createIdentity(username: string, account: any){
     // const signature = '123abc';
     // @ts-ignore
 
-    return Axios.post(url, { publicKey, address });
+    return Axios.post(url, { publicKey: publicKey.toString('hex'), address });
 };

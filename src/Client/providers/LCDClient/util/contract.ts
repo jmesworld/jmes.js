@@ -2,7 +2,7 @@ import {
   WaitTxBroadcastResult,
   BlockTxBroadcastResult,
   isTxError,
-} from '../client/lcd/api/TxAPI';
+} from '../lcd/api/TxAPI';
 import { TxInfo } from '../core/TxInfo';
 
 export function getCodeId(
