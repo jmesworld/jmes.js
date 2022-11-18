@@ -22,7 +22,7 @@ export class Client {
         }
     }
 
-    public createLDCDClient(config: LCDClientConfig){
+    public createLCDClient(config: LCDClientConfig){
         this.providers.LCDC = new LCDClient(config);
         return this.providers.LCDC;
 
