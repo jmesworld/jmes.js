@@ -1,7 +1,7 @@
 import { Wallet } from '../primitives/Wallet';
 import {Mnemonic} from "../primitives/Mnemonic/Mnemonic";
 import {DerivableKey} from "../primitives/DerivableKey/DerivableKey";
-import MarketplaceAPI from "./providers/MarketplaceAPI/marketplaceAPI";
+import MarketplaceAPI from "./providers/MarketplaceAPI/MarketplaceAPI";
 import IdentityAPI from "./providers/IdentityAPI/IdentityAPI";
 import {LCDClient, LCDClientConfig} from "./providers/LCDClient/lcd/LCDClient";
 import { JMES_COIN_TYPE } from "../CONSTANTS";

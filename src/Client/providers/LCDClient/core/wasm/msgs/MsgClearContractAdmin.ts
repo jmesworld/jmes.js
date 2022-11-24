@@ -86,7 +86,7 @@ export class MsgClearContractAdmin extends JSONSerializable<
   public packAny(isClassic?: boolean): Any {
     if (isClassic) {
       return Any.fromPartial({
-        typeUrl: '/terra.wasm.v1beta1.MsgClearContractAdmin',
+        typeUrl: '/jmes.wasm.v1beta1.MsgClearContractAdmin',
         value: MsgClearContractAdmin_legacy_pb.encode(
           this.toProto(isClassic) as MsgClearContractAdmin_legacy_pb
         ).finish(),
@@ -134,7 +134,7 @@ export class MsgClearContractAdmin extends JSONSerializable<
   public toData(isClassic?: boolean): MsgClearContractAdmin.Data {
     if (isClassic) {
       return {
-        '@type': '/terra.wasm.v1beta1.MsgClearContractAdmin',
+        '@type': '/jmes.wasm.v1beta1.MsgClearContractAdmin',
         admin: this.admin,
         contract: this.contract,
       };
@@ -165,7 +165,7 @@ export namespace MsgClearContractAdmin {
     };
   }
   export interface DataV1 {
-    '@type': '/terra.wasm.v1beta1.MsgClearContractAdmin';
+    '@type': '/jmes.wasm.v1beta1.MsgClearContractAdmin';
     admin: string;
     contract: string;
   }

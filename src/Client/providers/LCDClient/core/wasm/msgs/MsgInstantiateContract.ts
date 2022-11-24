@@ -143,7 +143,7 @@ export class MsgInstantiateContract extends JSONSerializable<
   public packAny(isClassic?: boolean): Any {
     if (isClassic) {
       return Any.fromPartial({
-        typeUrl: '/terra.wasm.v1beta1.MsgInstantiateContract',
+        typeUrl: '/jmes.wasm.v1beta1.MsgInstantiateContract',
         value: MsgInstantiateContract_legacy_pb.encode(
           this.toProto(isClassic) as MsgInstantiateContract_legacy_pb
         ).finish(),
@@ -207,7 +207,7 @@ export class MsgInstantiateContract extends JSONSerializable<
     const { sender, admin, code_id, label, init_msg, init_coins } = this;
     if (isClassic) {
       return {
-        '@type': '/terra.wasm.v1beta1.MsgInstantiateContract',
+        '@type': '/jmes.wasm.v1beta1.MsgInstantiateContract',
         sender,
         admin: admin || '',
         code_id: code_id.toFixed(),
@@ -253,7 +253,7 @@ export namespace MsgInstantiateContract {
   }
 
   export interface DataV1 {
-    '@type': '/terra.wasm.v1beta1.MsgInstantiateContract';
+    '@type': '/jmes.wasm.v1beta1.MsgInstantiateContract';
     sender: AccAddress;
     admin: AccAddress;
     code_id: string;

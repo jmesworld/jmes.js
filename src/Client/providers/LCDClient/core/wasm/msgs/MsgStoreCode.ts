@@ -108,7 +108,7 @@ export class MsgStoreCode extends JSONSerializable<
   public packAny(isClassic?: boolean): Any {
     let typeUrl: string;
     if (isClassic) {
-      typeUrl = '/terra.wasm.v1beta1.MsgStoreCode';
+      typeUrl = '/jmes.wasm.v1beta1.MsgStoreCode';
     } else {
       typeUrl = '/cosmwasm.wasm.v1.MsgStoreCode';
     }
@@ -159,7 +159,7 @@ export class MsgStoreCode extends JSONSerializable<
     const { sender, wasm_byte_code, instantiate_permission } = this;
     if (isClassic) {
       return {
-        '@type': '/terra.wasm.v1beta1.MsgStoreCode',
+        '@type': '/jmes.wasm.v1beta1.MsgStoreCode',
         sender,
         wasm_byte_code,
       };
@@ -194,7 +194,7 @@ export namespace MsgStoreCode {
   export type Amino = AminoV1 | AminoV2;
 
   export interface DataV1 {
-    '@type': '/terra.wasm.v1beta1.MsgStoreCode';
+    '@type': '/jmes.wasm.v1beta1.MsgStoreCode';
     sender: AccAddress;
     wasm_byte_code: string;
   }

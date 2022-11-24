@@ -122,7 +122,7 @@ export class MsgMigrateContract extends JSONSerializable<
   public packAny(isClassic?: boolean): Any {
     if (isClassic) {
       return Any.fromPartial({
-        typeUrl: '/terra.wasm.v1beta1.MsgMigrateContract',
+        typeUrl: '/jmes.wasm.v1beta1.MsgMigrateContract',
         value: MsgMigrateContract_legacy_pb.encode(
           this.toProto(isClassic) as MsgMigrateContract_legacy_pb
         ).finish(),
@@ -178,7 +178,7 @@ export class MsgMigrateContract extends JSONSerializable<
     const { admin, contract, new_code_id, migrate_msg } = this;
     if (isClassic) {
       return {
-        '@type': '/terra.wasm.v1beta1.MsgMigrateContract',
+        '@type': '/jmes.wasm.v1beta1.MsgMigrateContract',
         admin,
         contract,
         new_code_id: new_code_id.toFixed(),
@@ -217,7 +217,7 @@ export namespace MsgMigrateContract {
   }
 
   export interface DataV1 {
-    '@type': '/terra.wasm.v1beta1.MsgMigrateContract';
+    '@type': '/jmes.wasm.v1beta1.MsgMigrateContract';
     admin: AccAddress;
     contract: AccAddress;
     new_code_id: string;

@@ -81,7 +81,7 @@ export class MsgMigrateCode extends JSONSerializable<
       throw new Error('Not supported for the network');
     }
     return Any.fromPartial({
-      typeUrl: '/terra.wasm.v1beta1.MsgMigrateCode',
+      typeUrl: '/jmes.wasm.v1beta1.MsgMigrateCode',
       value: MsgMigrateCode_legacy_pb.encode(this.toProto(isClassic)).finish(),
     });
   }
@@ -113,7 +113,7 @@ export class MsgMigrateCode extends JSONSerializable<
     }
     const { sender, code_id, wasm_byte_code } = this;
     return {
-      '@type': '/terra.wasm.v1beta1.MsgMigrateCode',
+      '@type': '/jmes.wasm.v1beta1.MsgMigrateCode',
       sender,
       code_id: code_id.toFixed(),
       wasm_byte_code,
@@ -132,7 +132,7 @@ export namespace MsgMigrateCode {
   }
 
   export interface Data {
-    '@type': '/terra.wasm.v1beta1.MsgMigrateCode';
+    '@type': '/jmes.wasm.v1beta1.MsgMigrateCode';
     code_id: string;
     sender: AccAddress;
     wasm_byte_code: string;

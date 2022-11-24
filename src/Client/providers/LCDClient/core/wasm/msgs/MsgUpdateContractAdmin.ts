@@ -95,7 +95,7 @@ export class MsgUpdateContractAdmin extends JSONSerializable<
   public packAny(isClassic?: boolean): Any {
     if (isClassic) {
       return Any.fromPartial({
-        typeUrl: '/terra.wasm.v1beta1.MsgUpdateContractAdmin',
+        typeUrl: '/jmes.wasm.v1beta1.MsgUpdateContractAdmin',
         value: MsgUpdateContractAdmin_legacy_pb.encode(
           this.toProto(isClassic) as MsgUpdateContractAdmin_legacy_pb
         ).finish(),
@@ -146,7 +146,7 @@ export class MsgUpdateContractAdmin extends JSONSerializable<
     const { admin, new_admin, contract } = this;
     if (isClassic) {
       return {
-        '@type': '/terra.wasm.v1beta1.MsgUpdateContractAdmin',
+        '@type': '/jmes.wasm.v1beta1.MsgUpdateContractAdmin',
         admin,
         new_admin,
         contract,
@@ -182,7 +182,7 @@ export namespace MsgUpdateContractAdmin {
   }
 
   export interface DataV1 {
-    '@type': '/terra.wasm.v1beta1.MsgUpdateContractAdmin';
+    '@type': '/jmes.wasm.v1beta1.MsgUpdateContractAdmin';
     admin: AccAddress;
     new_admin: AccAddress;
     contract: AccAddress;
