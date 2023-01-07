@@ -1,1 +1,1 @@
-export const JMES_COIN_TYPE = 330;
+export const JMES_COIN_TYPE = 6280;
