@@ -49,7 +49,7 @@ export class Account {
        return isValid;
     }
     // @ts-ignore
-    async sendTransaction(transactionOpts:{recipientAddress: string, recipientAmount:number, memo?: string}): any{
+    async sendTransaction(transactionOpts:{recipientAddress: string, recipientAmount:number, memo?: string}, lcdcUrl?: string): any{
         // create a simple message that moves coin balances
         const send = new MsgSend(
             this.getAddress(),
@@ -63,10 +63,11 @@ export class Account {
             txOpts.memo = transactionOpts.memo;
         }
 
+        const URL = lcdcUrl ?? 'http://51.38.52.37:1317';
         const lcdc = new LCDClient({
             chainID: 'jmes-888',
             // chainID: 'testing',
-            URL: 'http://51.38.52.37:1317',
+            URL,
             isClassic: true
         });
 

@@ -6,7 +6,7 @@ export default async function getIdentity(identityName: string){
     // @ts-ignore
     const {endpoint} = this;
 
-    const url = `${endpoint.url}/identity/${identityName}`;
+    const url = `${endpoint.api_url}/identity/${identityName}`;
 
     return Axios.get(url);
 };

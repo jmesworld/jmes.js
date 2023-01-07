@@ -2,6 +2,12 @@ import getIdentity from "./methods/getIdentity";
 import getToken from "./methods/getToken";
 import createIdentity from "./methods/createIdentity";
 import {AxiosResponse} from "axios";
+
+export interface IdentityAPIConfig {
+    endpoint?:{
+        api_url?: string,
+    }
+}
 /**
  * Identity API is a specific provider that handles identity resolving for JMES Protocol users
  */
@@ -10,11 +16,11 @@ export default class IdentityAPI {
     public getToken!: (account: any) => Promise<AxiosResponse<any>>;
     public createIdentity!: (identityName: string, account: any) => Promise<any>;
 
-    private endpoint: { url: string };
-    constructor() {
+    private endpoint: { api_url: string };
 
+    constructor(config?: IdentityAPIConfig) {
         this.endpoint = {
-            url: 'http://51.38.52.37:3001'
+            api_url: config?.endpoint?.api_url ?? 'http://51.38.52.37:3001'
         }
     }
 };

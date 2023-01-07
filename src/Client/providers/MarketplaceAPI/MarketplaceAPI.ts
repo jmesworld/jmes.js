@@ -7,6 +7,13 @@ import {default as mintItem, MintItemParams} from "./methods/mintItem";
 import {default as findItem, FindItemParams} from "./methods/findItem";
 import {default as postItemOffer, ItemOfferParams} from "./methods/postItemOffer";
 import {default as postItemVote, ItemVoteParams} from "./methods/postItemVote";
+
+export interface MarketplaceAPIConfig {
+    endpoint?:{
+        api_url?: string,
+        images_url?: string
+    }
+}
 /**
  * Marketplace API is a specific provider we provide to our DAO product built on top of JMES Protocol
  */
@@ -22,11 +29,10 @@ export default class MarketplaceAPI {
     public postItemVote!: (itemVoteParams: ItemVoteParams, optionalProps: any) => Promise<any>;
     // TODO: make me private later
     public endpoint: { api_url: string, images_url: string };
-    constructor() {
-
+    constructor(config?: MarketplaceAPIConfig) {
         this.endpoint = {
-            api_url: 'http://51.38.52.37:3001',
-            images_url: 'http://51.38.52.37:3001/images'
+            api_url: config?.endpoint?.api_url ?? 'http://51.38.52.37:3001',
+            images_url: config?.endpoint?.images_url ?? 'http://51.38.52.37:3001/images'
         }
     }
 };

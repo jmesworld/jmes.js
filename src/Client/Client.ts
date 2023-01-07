@@ -1,10 +1,17 @@
 import { Wallet } from '../primitives/Wallet';
 import {Mnemonic} from "../primitives/Mnemonic/Mnemonic";
 import {DerivableKey} from "../primitives/DerivableKey/DerivableKey";
-import MarketplaceAPI from "./providers/MarketplaceAPI/MarketplaceAPI";
-import IdentityAPI from "./providers/IdentityAPI/IdentityAPI";
+import MarketplaceAPI, {MarketplaceAPIConfig} from "./providers/MarketplaceAPI/MarketplaceAPI";
+import IdentityAPI, {IdentityAPIConfig} from "./providers/IdentityAPI/IdentityAPI";
 import {LCDClient, LCDClientConfig} from "./providers/LCDClient/lcd/LCDClient";
 import { JMES_COIN_TYPE } from "../CONSTANTS";
+
+export interface ClientConfig {
+    providers?:{
+        marketplaceAPI?: MarketplaceAPIConfig,
+        identityAPI?: IdentityAPIConfig,
+    }
+}
 export class Client {
     public providers: {
         marketplaceAPI: MarketplaceAPI,
@@ -13,11 +20,11 @@ export class Client {
     };
     private test: any;
 
-    constructor() {
+    constructor(config?: ClientConfig) {
         // Specific provider to external services
         this.providers = {
-            marketplaceAPI: new MarketplaceAPI(),
-            identityAPI: new IdentityAPI(),
+            marketplaceAPI: new MarketplaceAPI(config?.providers?.marketplaceAPI),
+            identityAPI: new IdentityAPI(config?.providers?.identityAPI),
             LCDC: null
         }
     }

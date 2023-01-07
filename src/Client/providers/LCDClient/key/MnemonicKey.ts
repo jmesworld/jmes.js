@@ -4,7 +4,7 @@ import * as bip32 from '@scure/bip32';
 import * as bip39 from 'bip39';
 import { RawKey } from './RawKey';
 
-export const JMES_COIN_TYPE = 330;
+export const JMES_COIN_TYPE = 2680;
 
 interface MnemonicKeyOptions {
   /**

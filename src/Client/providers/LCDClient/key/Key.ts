@@ -152,20 +152,14 @@ export abstract class Key {
       copyTx.auth_info,
       copyTx.body
     );
-    console.log({sign_doc});
 
     let signature: SignatureV2;
     if (options.signMode === SignMode.SIGN_MODE_LEGACY_AMINO_JSON) {
-      console.error('LEGACY SIG');
       signature = await this.createSignatureAmino(sign_doc, isClassic);
     } else {
-      console.error('NORMAL SIG');
-
       signature = await this.createSignature(sign_doc, isClassic);
     }
 
-    // console.dir({signature: signature}, { depth: null});
-    //044eab1254c270cba2d806bda71d731f1d11cb310b61c51f8b26955a2180d56d46e0f35d343b59b5f928d0883117f1e3b38abaf5896b0a56e5c989df0a1ba4a696\n
     const sigData = signature.data.single as SignatureV2.Descriptor.Single;
     copyTx.signatures.push(...tx.signatures, sigData.signature);
     copyTx.auth_info.signer_infos.push(

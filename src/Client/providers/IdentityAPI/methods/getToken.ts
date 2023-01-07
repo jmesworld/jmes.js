@@ -13,7 +13,7 @@ export default async function getToken(account: any){
     // const { identifier, price } = itemOfferParams;
 
 
-    const url = `${endpoint.url}/identity/token`;
+    const url = `${endpoint.api_url}/identity/token`;
     console.log({url}, {signature, ts, address});
     // const signature = '123abc';
     // @ts-ignore
