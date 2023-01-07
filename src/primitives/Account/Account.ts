@@ -1,6 +1,6 @@
 import {DerivableKey} from "../DerivableKey";
 import * as elliptic from "elliptic";
-import {MsgSend} from "../../Client/providers/LCDClient/core";
+import {MsgSend, Coin} from "../../Client/providers/LCDClient/core";
 import {RawKey} from "../../Client/providers/LCDClient/key";
 import {LCDClient} from "../../Client/providers/LCDClient/lcd/LCDClient";
 
@@ -9,7 +9,12 @@ export class Account {
     private accountIndex: number;
     private test: any;
     private test2: any;
-    constructor(key: DerivableKey, accountIndex: number=0) {
+    private lcdcUrl: string;
+    private lcdc: LCDClient|null;
+    constructor(key: DerivableKey, accountIndex: number=0, lcdcUrl?: string|null) {
+
+        this.lcdc = null;
+        this.lcdcUrl = lcdcUrl ?? 'http://51.38.52.37:1317'
         // this.privateKey = key.derivePath(`m/0/${index}`);
         // this.derivableAccountKey = key;
         this.derivableAccountKey = key.derivePath(`m/${accountIndex}'`);
@@ -47,6 +52,32 @@ export class Account {
        isValid = pubKey.verify(message.toString(), Buffer.from(signature, 'hex'));
 
        return isValid;
+    }
+    async getLcdcClient(lcdcUrl?: string){
+        const URL = lcdcUrl ?? this.lcdcUrl;
+        console.log({URL});
+        if(!this.lcdc){
+            const lcdc = new LCDClient({
+                chainID: 'jmes-888',
+                // chainID: 'testing',
+                URL,
+                isClassic: true
+            });
+            this.lcdc = lcdc;
+        }
+
+        return this.lcdc;
+    }
+
+    async getBalance(address?: string){
+        const lcdcClient = await this.getLcdcClient();
+        try {
+            const [balance] = await lcdcClient.bank.balance(address ?? this.getAddress());
+            return balance.get('ujmes') || new Coin("ujmes", 0)
+        } catch (e){
+            console.log(e);
+            throw e
+        }
     }
     // @ts-ignore
     async sendTransaction(transactionOpts:{recipientAddress: string, recipientAmount:number, memo?: string}, lcdcUrl?: string): any{
