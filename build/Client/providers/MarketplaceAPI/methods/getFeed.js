@@ -40,14 +40,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var axios_1 = __importDefault(require("axios"));
-function getFeed() {
+function getFeed(optionalProps) {
     return __awaiter(this, void 0, void 0, function () {
-        var endpoint, url;
+        var endpoint, url, config;
         return __generator(this, function (_a) {
             console.log('Get feed');
             endpoint = this.endpoint;
             url = "".concat(endpoint.api_url, "/feed");
-            return [2 /*return*/, axios_1.default.get(url)];
+            config = {
+                headers: {}
+            };
+            if (optionalProps.token) {
+                // @ts-ignore
+                config.headers['Authorization'] = "Bearer ".concat(optionalProps.token);
+            }
+            return [2 /*return*/, axios_1.default.get(url, config)];
         });
     });
 }

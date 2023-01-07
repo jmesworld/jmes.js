@@ -1,4 +1,4 @@
-/// <reference types="node" />
+/// <reference types="react-native" />
 export declare type APIParams = Record<string, string | number | null | undefined>;
 export interface Pagination {
     next_key: string | null;

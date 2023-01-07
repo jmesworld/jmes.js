@@ -16,10 +16,11 @@ var postItemVote_1 = __importDefault(require("./methods/postItemVote"));
  * Marketplace API is a specific provider we provide to our DAO product built on top of JMES Protocol
  */
 var MarketplaceAPI = /** @class */ (function () {
-    function MarketplaceAPI() {
+    function MarketplaceAPI(config) {
+        var _a, _b, _c, _d;
         this.endpoint = {
-            api_url: 'http://51.38.52.37:3001',
-            images_url: 'http://51.38.52.37:3001/images'
+            api_url: (_b = (_a = config === null || config === void 0 ? void 0 : config.endpoint) === null || _a === void 0 ? void 0 : _a.api_url) !== null && _b !== void 0 ? _b : 'http://51.38.52.37:3001',
+            images_url: (_d = (_c = config === null || config === void 0 ? void 0 : config.endpoint) === null || _c === void 0 ? void 0 : _c.images_url) !== null && _d !== void 0 ? _d : 'http://51.38.52.37:3001/images'
         };
     }
     return MarketplaceAPI;
@@ -35,4 +36,4 @@ MarketplaceAPI.prototype.findItem = findItem_1.default;
 MarketplaceAPI.prototype.postItemOffer = postItemOffer_1.default;
 MarketplaceAPI.prototype.postItemVote = postItemVote_1.default;
 MarketplaceAPI.prototype.mintItem = mintItem_1.default;
-//# sourceMappingURL=marketplaceAPI.js.map
+//# sourceMappingURL=MarketplaceAPI.js.map

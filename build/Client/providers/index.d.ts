@@ -1,1 +1,1 @@
-export * from './MarketplaceAPI/marketplaceAPI';
+export * from './MarketplaceAPI/MarketplaceAPI';

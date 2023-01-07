@@ -35,11 +35,27 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-function createIdentity() {
+var axios_1 = __importDefault(require("axios"));
+function createIdentity(username, account) {
     return __awaiter(this, void 0, void 0, function () {
+        var address, publicKey, endpoint, url;
         return __generator(this, function (_a) {
-            return [2 /*return*/];
+            console.log('Create identity with uname', username);
+            if (!username)
+                throw new Error('Username required');
+            address = account.getAddress();
+            publicKey = account.getPublic();
+            console.log({ address: address, publicKey: publicKey });
+            endpoint = this.endpoint;
+            url = "".concat(endpoint.api_url, "/identity/").concat(username);
+            console.log({ url: url });
+            // const signature = '123abc';
+            // @ts-ignore
+            return [2 /*return*/, axios_1.default.post(url, { publicKey: publicKey.toString('hex'), address: address })];
         });
     });
 }

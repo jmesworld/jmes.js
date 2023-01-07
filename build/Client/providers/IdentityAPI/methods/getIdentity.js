@@ -46,7 +46,7 @@ function getIdentity(identityName) {
         return __generator(this, function (_a) {
             console.log('Search for identity name', identityName);
             endpoint = this.endpoint;
-            url = "".concat(endpoint.url, "/identity/").concat(identityName);
+            url = "".concat(endpoint.api_url, "/identity/").concat(identityName);
             return [2 /*return*/, axios_1.default.get(url)];
         });
     });

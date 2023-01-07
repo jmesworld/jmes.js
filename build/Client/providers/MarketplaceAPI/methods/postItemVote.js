@@ -40,14 +40,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var axios_1 = __importDefault(require("axios"));
-function postItemVote(itemVoteParams) {
+function postItemVote(itemVoteParams, optionalProps) {
     return __awaiter(this, void 0, void 0, function () {
-        var endpoint, identifier, direction, userIdentifier, url;
+        var endpoint, identifier, direction, url, config;
         return __generator(this, function (_a) {
             endpoint = this.endpoint;
-            identifier = itemVoteParams.identifier, direction = itemVoteParams.direction, userIdentifier = itemVoteParams.userIdentifier;
+            identifier = itemVoteParams.identifier, direction = itemVoteParams.direction;
             url = "".concat(endpoint.api_url, "/item/").concat(identifier, "/vote");
-            return [2 /*return*/, axios_1.default.post(url, { direction: direction, userIdentifier: userIdentifier })];
+            config = {
+                headers: {}
+            };
+            if (optionalProps.token) {
+                // @ts-ignore
+                config.headers['Authorization'] = "Bearer ".concat(optionalProps.token);
+            }
+            return [2 /*return*/, axios_1.default.post(url, { direction: direction }, config)];
         });
     });
 }

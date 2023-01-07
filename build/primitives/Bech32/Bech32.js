@@ -14,14 +14,14 @@ function checkPrefixAndLength(prefix, data, length) {
 var AccAddress;
 (function (AccAddress) {
     /**
-     * Checks if a string is a valid Terra account address.
+     * Checks if a string is a valid jmes account address.
      *
      * @param data string to check
      */
     function validate(data) {
         // 44 for normal account and 64 for contract account
-        return (checkPrefixAndLength('terra', data, 44) ||
-            checkPrefixAndLength('terra', data, 64));
+        return (checkPrefixAndLength('jmes', data, 44) ||
+            checkPrefixAndLength('jmes', data, 64));
     }
     AccAddress.validate = validate;
     /**
@@ -31,79 +31,79 @@ var AccAddress;
      */
     function fromValAddress(address) {
         var vals = bech32_1.bech32.decode(address);
-        return bech32_1.bech32.encode('terra', vals.words);
+        return bech32_1.bech32.encode('jmes', vals.words);
     }
     AccAddress.fromValAddress = fromValAddress;
 })(AccAddress = exports.AccAddress || (exports.AccAddress = {}));
 var AccPubKey;
 (function (AccPubKey) {
     /**
-     * Checks if a string is a Terra account's public key
+     * Checks if a string is a jmes account's public key
      * @param data string to check
      */
     function validate(data) {
-        return checkPrefixAndLength('terrapub', data, 47);
+        return checkPrefixAndLength('jmespub', data, 47);
     }
     AccPubKey.validate = validate;
     /**
-     * Converts a Terra validator pubkey to an account pubkey.
+     * Converts a jmes validator pubkey to an account pubkey.
      * @param address validator pubkey to convert
      */
     function fromAccAddress(address) {
         var vals = bech32_1.bech32.decode(address);
-        return bech32_1.bech32.encode('terrapub', vals.words);
+        return bech32_1.bech32.encode('jmespub', vals.words);
     }
     AccPubKey.fromAccAddress = fromAccAddress;
 })(AccPubKey = exports.AccPubKey || (exports.AccPubKey = {}));
 var ValAddress;
 (function (ValAddress) {
     /**
-     * Checks if a string is a Terra validator address.
+     * Checks if a string is a jmes validator address.
      *
      * @param data string to check
      */
     function validate(data) {
-        return checkPrefixAndLength('terravaloper', data, 51);
+        return checkPrefixAndLength('jmesvaloper', data, 51);
     }
     ValAddress.validate = validate;
     /**
-     * Converts a Terra account address to a validator address.
+     * Converts a jmes account address to a validator address.
      * @param address account address to convert
      */
     function fromAccAddress(address) {
         var vals = bech32_1.bech32.decode(address);
-        return bech32_1.bech32.encode('terravaloper', vals.words);
+        return bech32_1.bech32.encode('jmesvaloper', vals.words);
     }
     ValAddress.fromAccAddress = fromAccAddress;
 })(ValAddress = exports.ValAddress || (exports.ValAddress = {}));
 var ValPubKey;
 (function (ValPubKey) {
     /**
-     * Checks if a string is a Terra validator pubkey
+     * Checks if a string is a jmes validator pubkey
      * @param data string to check
      */
     function validate(data) {
-        return checkPrefixAndLength('terravaloperpub', data, 54);
+        return checkPrefixAndLength('jmesvaloperpub', data, 54);
     }
     ValPubKey.validate = validate;
     /**
-     * Converts a Terra validator operator address to a validator pubkey.
+     * Converts a jmes validator operator address to a validator pubkey.
      * @param valAddress account pubkey
      */
     function fromValAddress(valAddress) {
         var vals = bech32_1.bech32.decode(valAddress);
-        return bech32_1.bech32.encode('terravaloperpub', vals.words);
+        return bech32_1.bech32.encode('jmesvaloperpub', vals.words);
     }
     ValPubKey.fromValAddress = fromValAddress;
 })(ValPubKey = exports.ValPubKey || (exports.ValPubKey = {}));
 var ValConsAddress;
 (function (ValConsAddress) {
     /**
-     * Checks if a string is a Terra validator consensus address
+     * Checks if a string is a jmes validator consensus address
      * @param data string to check
      */
     function validate(data) {
-        return checkPrefixAndLength('terravalcons', data, 51);
+        return checkPrefixAndLength('jmesvalcons', data, 51);
     }
     ValConsAddress.validate = validate;
 })(ValConsAddress = exports.ValConsAddress || (exports.ValConsAddress = {}));

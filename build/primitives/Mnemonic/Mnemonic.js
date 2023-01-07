@@ -27,6 +27,8 @@ exports.Mnemonic = void 0;
 var crypto = __importStar(require("crypto"));
 var ethers_1 = require("ethers");
 var bip39 = __importStar(require("bip39"));
+var DerivableKey_1 = require("../DerivableKey");
+var bip32 = __importStar(require("@scure/bip32"));
 var Mnemonic = /** @class */ (function () {
     function Mnemonic(mnemonic) {
         this.mnemonic = (mnemonic) ? mnemonic : Mnemonic.generateMnemonic();
@@ -34,19 +36,29 @@ var Mnemonic = /** @class */ (function () {
     // @ts-ignore
     Mnemonic.generateMnemonic = function (overwroteRandomBytes) {
         if (overwroteRandomBytes === void 0) { overwroteRandomBytes = null; }
-        var getRandomValuesFn = (crypto && crypto.webcrypto) ? crypto.webcrypto.getRandomValues : crypto.getRandomValues;
+        var getRandomValuesFn = (crypto && crypto.webcrypto)
+            // FIX: Binding done to fix specific issue with nodev18 (https://github.com/cloudflare/miniflare/pull/216)
+            ? crypto.webcrypto.getRandomValues.bind(crypto.webcrypto)
+            : crypto.getRandomValues;
         var uintArray = new Uint8Array(32);
+        // @ts-ignore
         var randomBytes = (overwroteRandomBytes !== null) ? overwroteRandomBytes : getRandomValuesFn(uintArray);
         // @ts-ignore
         var mnemonic = ethers_1.ethers.utils.entropyToMnemonic(randomBytes);
         return mnemonic;
     };
     Mnemonic.mnemonicToSeed = function (mnemonic) {
-        var seed = bip39.mnemonicToSeedSync(mnemonic);
-        return seed.toString('hex');
+        return bip39.mnemonicToSeedSync(mnemonic);
     };
     Mnemonic.prototype.toSeed = function () {
         return Mnemonic.mnemonicToSeed(this.mnemonic);
+    };
+    // @ts-ignore
+    Mnemonic.prototype.toMasterDerivableKey = function (opts) {
+        if (opts === void 0) { opts = { account: 0, index: 0 }; }
+        var seed = this.toSeed();
+        var masterKey = bip32.HDKey.fromMasterSeed(seed);
+        return new DerivableKey_1.DerivableKey(masterKey);
     };
     return Mnemonic;
 }());

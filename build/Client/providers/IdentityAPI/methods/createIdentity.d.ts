@@ -1,1 +1,1 @@
-export default function createIdentity(): Promise<void>;
+export default function createIdentity(username: string, account: any): Promise<import("axios").AxiosResponse<any, any>>;
