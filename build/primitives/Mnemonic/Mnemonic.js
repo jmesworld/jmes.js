@@ -30,10 +30,11 @@ var bip39 = __importStar(require("bip39"));
 var DerivableKey_1 = require("../DerivableKey");
 var bip32 = __importStar(require("@scure/bip32"));
 var Mnemonic = /** @class */ (function () {
-    function Mnemonic(mnemonic) {
+    function Mnemonic(mnemonic, password) {
         this.mnemonic = (mnemonic) ? mnemonic : Mnemonic.generateMnemonic();
+        // FIXME: that's bad. Only valid for dev times...
+        this.password = password !== null && password !== void 0 ? password : null;
     }
-    // @ts-ignore
     Mnemonic.generateMnemonic = function (overwroteRandomBytes) {
         if (overwroteRandomBytes === void 0) { overwroteRandomBytes = null; }
         var getRandomValuesFn = (crypto && crypto.webcrypto)
@@ -47,11 +48,11 @@ var Mnemonic = /** @class */ (function () {
         var mnemonic = ethers_1.ethers.utils.entropyToMnemonic(randomBytes);
         return mnemonic;
     };
-    Mnemonic.mnemonicToSeed = function (mnemonic) {
-        return bip39.mnemonicToSeedSync(mnemonic);
+    Mnemonic.mnemonicToSeed = function (mnemonic, password) {
+        return (password) ? bip39.mnemonicToSeedSync(mnemonic, password) : bip39.mnemonicToSeedSync(mnemonic);
     };
     Mnemonic.prototype.toSeed = function () {
-        return Mnemonic.mnemonicToSeed(this.mnemonic);
+        return Mnemonic.mnemonicToSeed(this.mnemonic, this.password);
     };
     // @ts-ignore
     Mnemonic.prototype.toMasterDerivableKey = function (opts) {

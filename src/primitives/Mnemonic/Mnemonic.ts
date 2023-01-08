@@ -9,6 +9,7 @@ export class Mnemonic {
     mnemonic: string;
 
     // @ts-ignore
+    private password: string | null;
     static generateMnemonic(overwroteRandomBytes = null){
         const getRandomValuesFn = (crypto && crypto.webcrypto)
             // FIX: Binding done to fix specific issue with nodev18 (https://github.com/cloudflare/miniflare/pull/216)
@@ -22,15 +23,17 @@ export class Mnemonic {
         return mnemonic;
     }
 
-    static mnemonicToSeed(mnemonic: string) {
-        return bip39.mnemonicToSeedSync(mnemonic);
+    static mnemonicToSeed(mnemonic: string, password?: string | null) {
+        return (password) ? bip39.mnemonicToSeedSync(mnemonic, password) : bip39.mnemonicToSeedSync(mnemonic);
     }
 
-    constructor(mnemonic?: string) {
+    constructor(mnemonic?: string, password?: string) {
         this.mnemonic = (mnemonic) ? mnemonic : Mnemonic.generateMnemonic();
+        // FIXME: that's bad. Only valid for dev times...
+        this.password = password ?? null;
     }
     toSeed(){
-        return Mnemonic.mnemonicToSeed(this.mnemonic);
+        return Mnemonic.mnemonicToSeed(this.mnemonic, this.password);
     }
     // @ts-ignore
     toMasterDerivableKey(opts = { account: 0, index: 0}){
