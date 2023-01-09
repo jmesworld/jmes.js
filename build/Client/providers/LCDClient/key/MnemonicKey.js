@@ -54,7 +54,7 @@ exports.MnemonicKey = exports.JMES_COIN_TYPE = void 0;
 var bip32 = __importStar(require("@scure/bip32"));
 var bip39 = __importStar(require("bip39"));
 var RawKey_1 = require("./RawKey");
-exports.JMES_COIN_TYPE = 2680;
+exports.JMES_COIN_TYPE = 6280;
 var DEFAULT_OPTIONS = {
     account: 0,
     index: 0,

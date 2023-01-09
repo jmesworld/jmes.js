@@ -1,5 +1,5 @@
 import { RawKey } from './RawKey';
-export declare const JMES_COIN_TYPE = 2680;
+export declare const JMES_COIN_TYPE = 6280;
 interface MnemonicKeyOptions {
     /**
      * Space-separated list of words for the mnemonic key.
