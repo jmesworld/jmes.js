@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    <script src="http://unpkg.com/jmes/dist/jmes.min.js" />-->
+    <script src="./dist/jmes.min.js"></script>
+    <script>
+        const Client = jmes.Client;
+        const Mnemonic = jmes.Mnemonic;
+        const client = new Client();
+
+        const mnemonic = new Mnemonic(
+            "shrimp various silver merge kidney kitten winter pluck smooth kidney enemy bulb script plug private margin leader repair enact clever duck woman luxury muscle"
+        );
+
+        window.sendTransaction = async () => {
+            const wallet = await client.createWallet(mnemonic, "http://51.38.52.37:1888") ;
+            const account = await wallet.getAccount();
+
+            console.log('account', account);
+
+            const res = await account.sendTransaction(
+                {
+                    recipientAddress: "jmes1jg4hs0qnytzl873zme2hp378na64z2e75v8xn7",
+                    recipientAmount: 200,
+                },
+                "http://51.38.52.37:1888"
+            );
+            console.log({ res });
+            return res;
+        };
+
+        // sendTransaction();
+
+    </script>
+</head>
+
+<body>
+
+</body>
+</html>

@@ -1,6 +1,6 @@
 {
   "name": "jmes",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Javascript developer library to interact with JMES Network",
   "main": "build/index.js",
   "unpkg": "dist/jmes.min.js",
@@ -24,7 +24,7 @@
   "dependencies": {
     "@scure/bip32": "^1.1.1",
     "@terra-money/legacy.proto": "npm:@terra-money/terra.proto@^0.1.7",
-    "@terra-money/terra.proto": "^2.1.0",
+    "@jmesworld/jmes.proto": "https://gitpkg.now.sh/mayoreee/jmes.proto/js/?chore",
     "axios": "^0.27.2",
     "bech32": "^2.0.0",
     "bip32": "^3.1.0",
