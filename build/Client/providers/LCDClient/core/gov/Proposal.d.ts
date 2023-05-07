@@ -44,7 +44,7 @@ export declare class Proposal extends JSONSerializable<Proposal.Amino, Proposal.
     toProto(isClassic?: boolean): Proposal.Proto;
 }
 export declare namespace Proposal {
-    const Status: typeof ProposalStatus;
+    const Status: any;
     type Status = ProposalStatus;
     interface FinalTallyResult {
         yes: Int;

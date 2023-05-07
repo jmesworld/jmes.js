@@ -5,7 +5,7 @@ export * from './BasicAllowance';
 export * from './PeriodicAllowance';
 export * from './AllowedMsgAllowance';
 import { Any } from '@terra-money/legacy.proto/google/protobuf/any';
-export declare type Allowance = BasicAllowance | PeriodicAllowance | AllowedMsgAllowance;
+export type Allowance = BasicAllowance | PeriodicAllowance | AllowedMsgAllowance;
 export declare namespace Allowance {
     type Amino = BasicAllowance.Amino | PeriodicAllowance.Amino | AllowedMsgAllowance.Amino;
     type Data = BasicAllowance.Data | PeriodicAllowance.Data | AllowedMsgAllowance.Data;

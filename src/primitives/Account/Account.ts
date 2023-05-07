@@ -58,7 +58,7 @@ export class Account {
         console.log({URL});
         if(!this.lcdc){
             const lcdc = new LCDClient({
-                chainID: 'jmes-888',
+                chainID: 'jmes-testet-1',
                 // chainID: 'testing',
                 URL,
                 isClassic: true
@@ -80,7 +80,7 @@ export class Account {
         }
     }
     // @ts-ignore
-    async sendTransaction(transactionOpts:{recipientAddress: string, recipientAmount:number, memo?: string}, lcdcUrl?: string): any{
+    async sendTransaction(transactionOpts:{recipientAddress: string, recipientAmount:number, memo?: string, fee?: string}, lcdcUrl?: string, chainId?: string): any{
         // create a simple message that moves coin balances
         const send = new MsgSend(
             this.getAddress(),
@@ -94,15 +94,16 @@ export class Account {
             txOpts.memo = transactionOpts.memo;
         }
 
-        const URL = lcdcUrl ?? 'http://51.38.52.37:1317';
+        const URL = lcdcUrl ?? 'http://64.92.191.45:1317';
         const lcdc = new LCDClient({
-            chainID: 'jmes-888',
+            chainID: 'jmes-testnet-1',
             // chainID: 'testing',
             URL,
-            isClassic: true
+            isClassic: true,
         });
 
-
+        console.log("lcdurl: ", URL)
+        console.log("chainId: ", chainId)
         // @ts-ignore
         return lcdc.wallet(new RawKey(this.getPrivate()))
             //@ts-ignore
@@ -111,7 +112,7 @@ export class Account {
             .then(tx => lcdc.tx.broadcast(tx))
             //@ts-ignore
             .then(result => {
-                console.log(`TX hash: ${result.txhash}`);
+                // console.log(`TX hash: ${result.txhash}`);
                 return result
             }).catch((e: any)=>{
                 console.log(e);

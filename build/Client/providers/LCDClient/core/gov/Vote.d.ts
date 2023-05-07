@@ -9,7 +9,7 @@ export declare class Vote extends JSONSerializable<Vote.Amino, Vote.Data, Vote.P
     proposal_id: number;
     voter: AccAddress;
     options: WeightedVoteOption[];
-    Option: typeof VoteOption;
+    Option: any;
     /**
      * @param proposal_id ID of proposal to vote on
      * @param voter voter's account address
@@ -24,7 +24,7 @@ export declare class Vote extends JSONSerializable<Vote.Amino, Vote.Data, Vote.P
     toProto(_?: boolean): Vote.Proto;
 }
 export declare namespace Vote {
-    const Option: typeof VoteOption;
+    const Option: any;
     type Option = VoteOption;
     interface Amino {
         proposal_id: string;

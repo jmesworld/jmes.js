@@ -21,5 +21,6 @@ export declare class Account {
         recipientAddress: string;
         recipientAmount: number;
         memo?: string;
-    }, lcdcUrl?: string): any;
+        fee?: string;
+    }, lcdcUrl?: string, chainId?: string): any;
 }

@@ -2,7 +2,7 @@ import { JSONSerializable } from '../util/json';
 import { LegacyAminoPubKey as LegacyAminoPubKey_pb } from '@terra-money/terra.proto/cosmos/crypto/multisig/keys';
 import { Any } from '@terra-money/terra.proto/google/protobuf/any';
 import { PubKey as PubKey_pb } from '@terra-money/terra.proto/cosmos/crypto/secp256k1/keys';
-export declare type PublicKey = SimplePublicKey | LegacyAminoMultisigPublicKey | ValConsPublicKey;
+export type PublicKey = SimplePublicKey | LegacyAminoMultisigPublicKey | ValConsPublicKey;
 export declare namespace PublicKey {
     type Amino = SimplePublicKey.Amino | LegacyAminoMultisigPublicKey.Amino | ValConsPublicKey.Amino;
     type Data = SimplePublicKey.Data | LegacyAminoMultisigPublicKey.Data | ValConsPublicKey.Data;

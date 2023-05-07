@@ -44,7 +44,7 @@ export declare class Validator extends JSONSerializable<Validator.Amino, Validat
     static fromProto(data: Validator.Proto): Validator;
 }
 export declare namespace Validator {
-    const Status: typeof BondStatus;
+    const Status: any;
     type Status = BondStatus;
     interface Amino {
         operator_address: ValAddress;
