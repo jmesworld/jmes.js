@@ -109,9 +109,7 @@ export class Account {
             //@ts-ignore
             .createAndSignTx(txOpts)
             //@ts-ignore
-            .then(tx => {
-                console.log("tx to be broadcasted: ", tx);
-                lcdc.tx.broadcast(tx)})
+            .then(tx => lcdc.tx.broadcast(tx))
             //@ts-ignore
             .then(result => {
                 // console.log(`TX hash: ${result.txhash}`);

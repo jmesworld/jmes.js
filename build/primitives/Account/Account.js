@@ -177,12 +177,10 @@ var Account = /** @class */ (function () {
                         //@ts-ignore
                         .createAndSignTx(txOpts)
                         //@ts-ignore
-                        .then(function (tx) {
-                        console.log("tx to be broadcasted: ", tx);
-                        lcdc.tx.broadcast(tx);
-                    })
+                        .then(function (tx) { return lcdc.tx.broadcast(tx); })
                         //@ts-ignore
                         .then(function (result) {
+                        // console.log(`TX hash: ${result.txhash}`);
                         return result;
                     }).catch(function (e) {
                         console.log(e);
