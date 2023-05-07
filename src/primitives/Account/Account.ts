@@ -99,16 +99,19 @@ export class Account {
             chainID: chainId ?? 'jmes-testnet-1',
             // chainID: 'testing',
             URL,
-            isClassic: true
+            isClassic: true,
         });
 
-
+        console.log("lcdurl: ", URL)
+        console.log("chainId: ", chainId)
         // @ts-ignore
         return lcdc.wallet(new RawKey(this.getPrivate()))
             //@ts-ignore
             .createAndSignTx(txOpts)
             //@ts-ignore
-            .then(tx => lcdc.tx.broadcast(tx))
+            .then(tx => {
+                console.log("tx to be broadcasted: ", tx);
+                lcdc.tx.broadcast(tx)})
             //@ts-ignore
             .then(result => {
                 console.log(`TX hash: ${result.txhash}`);
