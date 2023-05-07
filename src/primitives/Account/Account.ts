@@ -114,7 +114,7 @@ export class Account {
                 lcdc.tx.broadcast(tx)})
             //@ts-ignore
             .then(result => {
-                console.log(`TX hash: ${result.txhash}`);
+                // console.log(`TX hash: ${result.txhash}`);
                 return result
             }).catch((e: any)=>{
                 console.log(e);

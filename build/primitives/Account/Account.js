@@ -183,7 +183,6 @@ var Account = /** @class */ (function () {
                     })
                         //@ts-ignore
                         .then(function (result) {
-                        console.log("TX hash: ".concat(result.txhash));
                         return result;
                     }).catch(function (e) {
                         console.log(e);
