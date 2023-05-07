@@ -112,7 +112,7 @@ export declare namespace ModeInfo {
         multi?: Multi.Data;
     }
     type Proto = ModeInfo_pb;
-    const SignMode: typeof SignMode_pb;
+    const SignMode: any;
     type SignMode = SignMode_pb;
     class Single {
         mode: SignMode;

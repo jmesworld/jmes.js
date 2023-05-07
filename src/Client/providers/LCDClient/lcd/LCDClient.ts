@@ -59,20 +59,16 @@ const DEFAULT_LCD_OPTIONS: Partial<LCDClientConfig> = {
 // forked network : false
 const DEFAULT_NETWORK_TYPE_BY_CHAIN_ID: { [key: string]: boolean } = {
   default: false,
-  'jmes-888': true,
   'jmes-testnet-1': true
 
 };
 
 const DEFAULT_GAS_PRICES_BY_CHAIN_ID: { [key: string]: Coins.Input } = {
   default: {
-    ujmes: 0.15,
-  },
-  'jmes-888': {
-    ujmes: 0.15,
+    ujmes: 0.35,
   },
   'jmes-testnet-1': {
-    ujmes: 0.15,
+    ujmes: 0.35,
   },
 };
 

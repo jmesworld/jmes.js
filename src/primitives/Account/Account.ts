@@ -58,7 +58,7 @@ export class Account {
         console.log({URL});
         if(!this.lcdc){
             const lcdc = new LCDClient({
-                chainID: 'jmes-888',
+                chainID: 'jmes-testet-1',
                 // chainID: 'testing',
                 URL,
                 isClassic: true
@@ -96,7 +96,7 @@ export class Account {
 
         const URL = lcdcUrl ?? 'http://64.92.191.45:1317';
         const lcdc = new LCDClient({
-            chainID: chainId ?? 'jmes-testnet-1',
+            chainID: 'jmes-testnet-1',
             // chainID: 'testing',
             URL,
             isClassic: true,

@@ -26,7 +26,7 @@ export declare class MsgVote extends JSONSerializable<MsgVote.Amino, MsgVote.Dat
     static unpackAny(msgAny: Any, _?: boolean): MsgVote;
 }
 export declare namespace MsgVote {
-    const Option: typeof VoteOption;
+    const Option: any;
     type Option = VoteOption;
     interface Amino {
         type: 'gov/MsgVote' | 'cosmos-sdk/MsgVote';

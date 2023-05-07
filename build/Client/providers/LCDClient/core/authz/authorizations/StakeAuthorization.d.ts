@@ -36,7 +36,7 @@ export declare namespace StakeAuthorizationValidators {
 }
 export declare namespace StakeAuthorization {
     type Type = AuthorizationType;
-    const Type: typeof AuthorizationType;
+    const Type: any;
     interface Data {
         '@type': '/cosmos.staking.v1beta1.StakeAuthorization';
         max_tokens?: Coin.Data;

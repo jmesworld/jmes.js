@@ -23,14 +23,14 @@ var DEFAULT_LCD_OPTIONS = {
 // forked network : false
 var DEFAULT_NETWORK_TYPE_BY_CHAIN_ID = {
     default: false,
-    'jmes-888': true
+    'jmes-testnet-1': true
 };
 var DEFAULT_GAS_PRICES_BY_CHAIN_ID = {
     default: {
-        ujmes: 0.15,
+        ujmes: 0.35,
     },
-    'jmes-888': {
-        ujmes: 0.15,
+    'jmes-testnet-1': {
+        ujmes: 0.35,
     },
 };
 /**

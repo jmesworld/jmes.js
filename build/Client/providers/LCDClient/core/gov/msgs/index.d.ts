@@ -6,7 +6,7 @@ export * from './MsgDeposit';
 export * from './MsgSubmitProposal';
 export * from './MsgVote';
 export * from './MsgVoteWeighted';
-export declare type GovMsg = MsgDeposit | MsgSubmitProposal | MsgVote | MsgVoteWeighted;
+export type GovMsg = MsgDeposit | MsgSubmitProposal | MsgVote | MsgVoteWeighted;
 export declare namespace GovMsg {
     type Amino = MsgDeposit.Amino | MsgSubmitProposal.Amino | MsgVote.Amino | MsgVoteWeighted.Amino;
     type Data = MsgDeposit.Data | MsgSubmitProposal.Data | MsgVote.Data | MsgVoteWeighted.Data;

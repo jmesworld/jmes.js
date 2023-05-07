@@ -13,7 +13,7 @@ export declare class SignatureV2 {
     static fromAmino(data: SignatureV2.Amino): SignatureV2;
 }
 export declare namespace SignatureV2 {
-    const SignMode: typeof SignMode_pb;
+    const SignMode: any;
     type SignMode = SignMode_pb;
     interface Amino {
         signature: string;

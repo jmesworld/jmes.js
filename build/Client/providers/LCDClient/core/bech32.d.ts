@@ -1,13 +1,13 @@
 /** `terra-` prefixed account address */
-export declare type AccAddress = string;
+export type AccAddress = string;
 /** `terravaloper-` prefixed validator operator address */
-export declare type ValAddress = string;
+export type ValAddress = string;
 /** `terravalcons-` prefixed validator consensus address */
-export declare type ValConsAddress = string;
+export type ValConsAddress = string;
 /** `terrapub-` prefixed account public key */
-export declare type AccPubKey = string;
+export type AccPubKey = string;
 /** `terravaloperpub-` prefixed validator public key */
-export declare type ValPubKey = string;
+export type ValPubKey = string;
 export declare namespace AccAddress {
     /**
      * Checks if a string is a valid Terra account address.

@@ -37,7 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -117,7 +117,7 @@ var Account = /** @class */ (function () {
                 console.log({ URL: URL });
                 if (!this.lcdc) {
                     lcdc = new LCDClient_1.LCDClient({
-                        chainID: 'jmes-888',
+                        chainID: 'jmes-testet-1',
                         // chainID: 'testing',
                         URL: URL,
                         isClassic: true
@@ -153,7 +153,7 @@ var Account = /** @class */ (function () {
         });
     };
     // @ts-ignore
-    Account.prototype.sendTransaction = function (transactionOpts, lcdcUrl) {
+    Account.prototype.sendTransaction = function (transactionOpts, lcdcUrl, chainId) {
         return __awaiter(this, void 0, void 0, function () {
             var send, txOpts, URL, lcdc;
             return __generator(this, function (_a) {
@@ -163,19 +163,24 @@ var Account = /** @class */ (function () {
                     //@ts-ignore
                     txOpts.memo = transactionOpts.memo;
                 }
-                URL = lcdcUrl !== null && lcdcUrl !== void 0 ? lcdcUrl : 'http://51.38.52.37:1317';
+                URL = lcdcUrl !== null && lcdcUrl !== void 0 ? lcdcUrl : 'http://64.92.191.45:1317';
                 lcdc = new LCDClient_1.LCDClient({
-                    chainID: 'jmes-888',
+                    chainID: 'jmes-testnet-1',
                     // chainID: 'testing',
                     URL: URL,
-                    isClassic: true
+                    isClassic: true,
                 });
+                console.log("lcdurl: ", URL);
+                console.log("chainId: ", chainId);
                 // @ts-ignore
                 return [2 /*return*/, lcdc.wallet(new key_1.RawKey(this.getPrivate()))
                         //@ts-ignore
                         .createAndSignTx(txOpts)
                         //@ts-ignore
-                        .then(function (tx) { return lcdc.tx.broadcast(tx); })
+                        .then(function (tx) {
+                        console.log("tx to be broadcasted: ", tx);
+                        lcdc.tx.broadcast(tx);
+                    })
                         //@ts-ignore
                         .then(function (result) {
                         console.log("TX hash: ".concat(result.txhash));
