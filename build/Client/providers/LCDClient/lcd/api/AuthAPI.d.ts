@@ -23,7 +23,7 @@ export declare class AuthAPI extends BaseAPI {
     constructor(lcd: LCDClient);
     /**
      * Looks up the account information using its Terra account address. If the account has
-     * vesting, it will be one of [LazyGradedVestingAccount, DelayedVestingAccount, PeriodicVestingAccount, ContinuousVestingAccount]
+     * vesting, it will be one of [LazyGradedVestingAccount, DelayedVestingAccount, PeriodicVestingAccount, ContinuousVestingAccount, ForeverVestingAccount]
      *
      * @param address address of account to look up
      */

@@ -10,7 +10,7 @@ export class Mnemonic {
 
     // @ts-ignore
     private password: string | null;
-    static generateMnemonic(overwroteRandomBytes = null){
+    static generateMnemonic(overwroteRandomBytes: Uint8Array | null = null){
         const getRandomValuesFn = (crypto && crypto.webcrypto)
             // FIX: Binding done to fix specific issue with nodev18 (https://github.com/cloudflare/miniflare/pull/216)
             ? crypto.webcrypto.getRandomValues.bind(crypto.webcrypto)

@@ -10,6 +10,7 @@ export interface ClientConfig {
         marketplaceAPI?: MarketplaceAPIConfig;
         identityAPI?: IdentityAPIConfig;
         faucetAPI?: FaucetAPIConfig;
+        LCDC?: LCDClientConfig;
     };
 }
 export declare class Client {
@@ -17,10 +18,8 @@ export declare class Client {
         marketplaceAPI: MarketplaceAPI;
         identityAPI: IdentityAPI;
         faucetAPI: FaucetAPI;
-        LCDC: LCDClient | null;
+        LCDC: LCDClient;
     };
-    private test;
     constructor(config?: ClientConfig);
-    createLCDClient(config: LCDClientConfig): LCDClient;
-    createWallet(key: Mnemonic | DerivableKey, lcdcUrl?: string): Wallet;
+    createWallet(key: Mnemonic | DerivableKey): Wallet;
 }

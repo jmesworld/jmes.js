@@ -1,9 +1,10 @@
 import { Account } from '../Account';
 import { DerivableKey } from '../DerivableKey';
+import { LCDClient } from "Client/providers/LCDClient/lcd/LCDClient";
 export declare class Wallet {
     private chainDerivedKey;
-    lcdcUrl: string | null;
-    constructor(chainDerivedKey: DerivableKey, lcdcUrl?: string);
+    lcdcInstance: LCDClient | null;
+    constructor(chainDerivedKey: DerivableKey, lcdcInstance?: LCDClient);
     getAccount(index?: number): Account;
     signMessage(message: any): void;
     broadcastSignedMessage(signedMessage: any): void;

@@ -37,7 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -63,17 +63,11 @@ exports.Account = void 0;
 var elliptic = __importStar(require("elliptic"));
 var core_1 = require("../../Client/providers/LCDClient/core");
 var key_1 = require("../../Client/providers/LCDClient/key");
-var LCDClient_1 = require("../../Client/providers/LCDClient/lcd/LCDClient");
 var Account = /** @class */ (function () {
-    function Account(key, accountIndex, lcdcUrl) {
+    function Account(key, accountIndex, lcdcInstance) {
         if (accountIndex === void 0) { accountIndex = 0; }
-        this.lcdc = null;
-        this.lcdcUrl = lcdcUrl !== null && lcdcUrl !== void 0 ? lcdcUrl : 'http://51.38.52.37:1317';
-        // this.privateKey = key.derivePath(`m/0/${index}`);
-        // this.derivableAccountKey = key;
+        this.lcdcInstance = lcdcInstance !== null && lcdcInstance !== void 0 ? lcdcInstance : null;
         this.derivableAccountKey = key.derivePath("m/".concat(accountIndex, "'"));
-        // this.test = key.derivePath(`m/${accountIndex}'/0/0`).toAddress();
-        // this.test2 = key.derivePath(`m/${accountIndex}'`).derivePath('m/0/0').toAddress();
         this.accountIndex = accountIndex;
     }
     Account.prototype.getAddress = function (index) {
@@ -109,37 +103,23 @@ var Account = /** @class */ (function () {
         isValid = pubKey.verify(message.toString(), Buffer.from(signature, 'hex'));
         return isValid;
     };
-    Account.prototype.getLcdcClient = function (lcdcUrl) {
-        return __awaiter(this, void 0, void 0, function () {
-            var URL, lcdc;
-            return __generator(this, function (_a) {
-                URL = lcdcUrl !== null && lcdcUrl !== void 0 ? lcdcUrl : this.lcdcUrl;
-                console.log({ URL: URL });
-                if (!this.lcdc) {
-                    lcdc = new LCDClient_1.LCDClient({
-                        chainID: 'jmes-888',
-                        // chainID: 'testing',
-                        URL: URL,
-                        isClassic: true
-                    });
-                    this.lcdc = lcdc;
-                }
-                return [2 /*return*/, this.lcdc];
-            });
-        });
+    Account.prototype.getLCDClient = function () {
+        return this.lcdcInstance;
     };
     Account.prototype.getBalance = function (address) {
         return __awaiter(this, void 0, void 0, function () {
-            var lcdcClient, balance, e_1;
+            var lcdClient, balance, e_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.getLcdcClient()];
+                    case 0: return [4 /*yield*/, this.getLCDClient()];
                     case 1:
-                        lcdcClient = _a.sent();
+                        lcdClient = _a.sent();
+                        if (!lcdClient)
+                            throw new Error('LCDClient not initialized');
                         _a.label = 2;
                     case 2:
                         _a.trys.push([2, 4, , 5]);
-                        return [4 /*yield*/, lcdcClient.bank.balance(address !== null && address !== void 0 ? address : this.getAddress())];
+                        return [4 /*yield*/, lcdClient.bank.balance(address !== null && address !== void 0 ? address : this.getAddress())];
                     case 3:
                         balance = (_a.sent())[0];
                         return [2 /*return*/, balance.get('ujmes') || new core_1.Coin("ujmes", 0)];
@@ -153,37 +133,36 @@ var Account = /** @class */ (function () {
         });
     };
     // @ts-ignore
-    Account.prototype.sendTransaction = function (transactionOpts, lcdcUrl) {
+    Account.prototype.sendTransaction = function (transactionOpts) {
         return __awaiter(this, void 0, void 0, function () {
-            var send, txOpts, URL, lcdc;
+            var send, txOpts, lcdClient;
             return __generator(this, function (_a) {
-                send = new core_1.MsgSend(this.getAddress(), transactionOpts.recipientAddress, { ujmes: transactionOpts.recipientAmount });
-                txOpts = { msgs: [send] };
-                if (transactionOpts.memo) {
-                    //@ts-ignore
-                    txOpts.memo = transactionOpts.memo;
+                switch (_a.label) {
+                    case 0:
+                        send = new core_1.MsgSend(this.getAddress(), transactionOpts.recipientAddress, { ujmes: transactionOpts.recipientAmount });
+                        txOpts = { msgs: [send] };
+                        if (transactionOpts.memo) {
+                            //@ts-ignore
+                            txOpts.memo = transactionOpts.memo;
+                        }
+                        return [4 /*yield*/, this.getLCDClient()];
+                    case 1:
+                        lcdClient = _a.sent();
+                        // @ts-ignore
+                        return [2 /*return*/, lcdClient.wallet(new key_1.RawKey(this.getPrivate()))
+                                //@ts-ignore
+                                .createAndSignTx(txOpts)
+                                //@ts-ignore
+                                .then(function (tx) { return lcdc.tx.broadcast(tx); })
+                                //@ts-ignore
+                                .then(function (result) {
+                                console.log("TX hash: ".concat(result.txhash));
+                                return result;
+                            }).catch(function (e) {
+                                // console.log(e);
+                                throw e;
+                            })];
                 }
-                URL = lcdcUrl !== null && lcdcUrl !== void 0 ? lcdcUrl : 'http://51.38.52.37:1317';
-                lcdc = new LCDClient_1.LCDClient({
-                    chainID: 'jmes-888',
-                    // chainID: 'testing',
-                    URL: URL,
-                    isClassic: true
-                });
-                // @ts-ignore
-                return [2 /*return*/, lcdc.wallet(new key_1.RawKey(this.getPrivate()))
-                        //@ts-ignore
-                        .createAndSignTx(txOpts)
-                        //@ts-ignore
-                        .then(function (tx) { return lcdc.tx.broadcast(tx); })
-                        //@ts-ignore
-                        .then(function (result) {
-                        console.log("TX hash: ".concat(result.txhash));
-                        return result;
-                    }).catch(function (e) {
-                        console.log(e);
-                        throw e;
-                    })];
             });
         });
     };

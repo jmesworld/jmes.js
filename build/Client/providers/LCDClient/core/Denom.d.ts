@@ -1,1 +1,1 @@
-export declare type Denom = string;
+export type Denom = string;

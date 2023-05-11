@@ -22,6 +22,7 @@ export * from './auth/LazyGradedVestingAccount';
 export * from './auth/DelayedVestingAccount';
 export * from './auth/ContinuousVestingAccount';
 export * from './auth/PeriodicVestingAccount';
+export * from './auth/ForeverVestingAccount';
 
 // Bank
 export * from './bank/msgs';

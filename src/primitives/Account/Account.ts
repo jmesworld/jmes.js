@@ -7,19 +7,10 @@ import {LCDClient} from "../../Client/providers/LCDClient/lcd/LCDClient";
 export class Account {
     private derivableAccountKey: DerivableKey;
     private accountIndex: number;
-    private test: any;
-    private test2: any;
-    private lcdcUrl: string;
-    private lcdc: LCDClient|null;
-    constructor(key: DerivableKey, accountIndex: number=0, lcdcUrl?: string|null) {
-
-        this.lcdc = null;
-        this.lcdcUrl = lcdcUrl ?? 'http://51.38.52.37:1317'
-        // this.privateKey = key.derivePath(`m/0/${index}`);
-        // this.derivableAccountKey = key;
+    private lcdcInstance: LCDClient|null;
+    constructor(key: DerivableKey, accountIndex: number = 0, lcdcInstance?: LCDClient|null) {
+        this.lcdcInstance = lcdcInstance ?? null;
         this.derivableAccountKey = key.derivePath(`m/${accountIndex}'`);
-        // this.test = key.derivePath(`m/${accountIndex}'/0/0`).toAddress();
-        // this.test2 = key.derivePath(`m/${accountIndex}'`).derivePath('m/0/0').toAddress();
         this.accountIndex = accountIndex;
     }
     getAddress(index: number=0){
@@ -53,26 +44,15 @@ export class Account {
 
        return isValid;
     }
-    async getLcdcClient(lcdcUrl?: string){
-        const URL = lcdcUrl ?? this.lcdcUrl;
-        console.log({URL});
-        if(!this.lcdc){
-            const lcdc = new LCDClient({
-                chainID: 'jmes-888',
-                // chainID: 'testing',
-                URL,
-                isClassic: true
-            });
-            this.lcdc = lcdc;
-        }
-
-        return this.lcdc;
+    getLCDClient(){
+        return this.lcdcInstance;
     }
 
     async getBalance(address?: string){
-        const lcdcClient = await this.getLcdcClient();
+        const lcdClient = await this.getLCDClient();
+        if (!lcdClient) throw new Error('LCDClient not initialized');
         try {
-            const [balance] = await lcdcClient.bank.balance(address ?? this.getAddress());
+            const [balance] = await lcdClient.bank.balance(address ?? this.getAddress());
             return balance.get('ujmes') || new Coin("ujmes", 0)
         } catch (e){
             console.log(e);
@@ -80,31 +60,24 @@ export class Account {
         }
     }
     // @ts-ignore
-    async sendTransaction(transactionOpts:{recipientAddress: string, recipientAmount:number, memo?: string}, lcdcUrl?: string): any{
+    async sendTransaction(transactionOpts:{recipientAddress: string, recipientAmount:number, memo?: string}): any{
         // create a simple message that moves coin balances
         const send = new MsgSend(
             this.getAddress(),
             transactionOpts.recipientAddress,
-    { ujmes: transactionOpts.recipientAmount}
+            { ujmes: transactionOpts.recipientAmount}
         );
         const txOpts = {msgs: [send]};
         if(transactionOpts.memo){
             //@ts-ignore
-
             txOpts.memo = transactionOpts.memo;
         }
 
-        const URL = lcdcUrl ?? 'http://51.38.52.37:1317';
-        const lcdc = new LCDClient({
-            chainID: 'jmes-888',
-            // chainID: 'testing',
-            URL,
-            isClassic: true
-        });
-
+        // const URL = lcdcUrl ?? 'http://51.38.52.37:1317';
+        const lcdClient = await this.getLCDClient();
 
         // @ts-ignore
-        return lcdc.wallet(new RawKey(this.getPrivate()))
+        return lcdClient.wallet(new RawKey(this.getPrivate()))
             //@ts-ignore
             .createAndSignTx(txOpts)
             //@ts-ignore
@@ -114,7 +87,7 @@ export class Account {
                 console.log(`TX hash: ${result.txhash}`);
                 return result
             }).catch((e: any)=>{
-                console.log(e);
+                // console.log(e);
                 throw e;
             });
     }

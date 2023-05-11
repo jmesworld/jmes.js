@@ -37,6 +37,7 @@ __exportStar(require("./auth/LazyGradedVestingAccount"), exports);
 __exportStar(require("./auth/DelayedVestingAccount"), exports);
 __exportStar(require("./auth/ContinuousVestingAccount"), exports);
 __exportStar(require("./auth/PeriodicVestingAccount"), exports);
+__exportStar(require("./auth/ForeverVestingAccount"), exports);
 // Bank
 __exportStar(require("./bank/msgs"), exports);
 // Distribution

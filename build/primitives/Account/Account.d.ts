@@ -5,21 +5,18 @@ import { LCDClient } from "../../Client/providers/LCDClient/lcd/LCDClient";
 export declare class Account {
     private derivableAccountKey;
     private accountIndex;
-    private test;
-    private test2;
-    private lcdcUrl;
-    private lcdc;
-    constructor(key: DerivableKey, accountIndex?: number, lcdcUrl?: string | null);
+    private lcdcInstance;
+    constructor(key: DerivableKey, accountIndex?: number, lcdcInstance?: LCDClient | null);
     getAddress(index?: number): string;
     getPrivate(index?: number): Buffer;
     getPublic(index?: number): Buffer;
     signMessage(message: any, index?: number): Buffer;
     verifySignature(signature: any, message: any, publicKey: any): boolean;
-    getLcdcClient(lcdcUrl?: string): Promise<LCDClient>;
+    getLCDClient(): LCDClient | null;
     getBalance(address?: string): Promise<Coin>;
     sendTransaction(transactionOpts: {
         recipientAddress: string;
         recipientAmount: number;
         memo?: string;
-    }, lcdcUrl?: string): any;
+    }): any;
 }
