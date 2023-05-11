@@ -12,6 +12,7 @@ export interface ClientConfig {
         marketplaceAPI?: MarketplaceAPIConfig,
         identityAPI?: IdentityAPIConfig,
         faucetAPI?: FaucetAPIConfig,
+        LCDC?: LCDClientConfig,
     }
 }
 export class Client {
@@ -19,26 +20,28 @@ export class Client {
         marketplaceAPI: MarketplaceAPI,
         identityAPI: IdentityAPI,
         faucetAPI: FaucetAPI,
-        LCDC: LCDClient|null,
+        LCDC: LCDClient
     };
-    private test: any;
 
     constructor(config?: ClientConfig) {
+        const lcdcConfig = config?.providers?.LCDC ?? {
+            chainID: 'jmes-888',
+            URL: 'http://51.38.52.37:1317',
+            // Refers to the difference introduced with Phoenix-1 vs Columbus-6
+            // on /cosmos/ pathing on MsgInstantiateContract
+            isClassic: false,
+        };
+
         // Specific provider to external services
         this.providers = {
             marketplaceAPI: new MarketplaceAPI(config?.providers?.marketplaceAPI),
             identityAPI: new IdentityAPI(config?.providers?.identityAPI),
             faucetAPI: new FaucetAPI(config?.providers?.faucetAPI),
-            LCDC: null
+            LCDC: new LCDClient(lcdcConfig)
         }
     }
 
-    public createLCDClient(config: LCDClientConfig){
-        this.providers.LCDC = new LCDClient(config);
-        return this.providers.LCDC;
-
-    }
-    public createWallet(key: Mnemonic|DerivableKey, lcdcUrl?: string){
+    public createWallet(key: Mnemonic|DerivableKey){
         // Where 8888 is specific JMES Path for mainnet.
         // jmes-888 in testnet
         const bip44Path = `m/44'/${JMES_COIN_TYPE}'`;
@@ -51,6 +54,6 @@ export class Client {
 
         // @ts-ignore
         const chainDerivedKey = derivableKey.derivePath(bip44Path);
-        return  new Wallet(chainDerivedKey, lcdcUrl);
+        return  new Wallet(chainDerivedKey, this.providers.LCDC);
     }
 }
