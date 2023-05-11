@@ -9,7 +9,6 @@ export class Account {
     private accountIndex: number;
     private lcdcInstance: LCDClient|null;
     constructor(key: DerivableKey, accountIndex: number = 0, lcdcInstance?: LCDClient|null) {
-
         this.lcdcInstance = lcdcInstance ?? null;
         this.derivableAccountKey = key.derivePath(`m/${accountIndex}'`);
         this.accountIndex = accountIndex;
