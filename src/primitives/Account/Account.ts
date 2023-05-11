@@ -3,22 +3,15 @@ import * as elliptic from "elliptic";
 import {MsgSend, Coin} from "../../Client/providers/LCDClient/core";
 import {RawKey} from "../../Client/providers/LCDClient/key";
 import {LCDClient} from "../../Client/providers/LCDClient/lcd/LCDClient";
-import * as console from "console";
 
 export class Account {
     private derivableAccountKey: DerivableKey;
     private accountIndex: number;
-    private test: any;
-    private test2: any;
     private lcdcInstance: LCDClient|null;
-    constructor(key: DerivableKey, accountIndex: number=0, lcdcInstance?: LCDClient|null) {
+    constructor(key: DerivableKey, accountIndex: number = 0, lcdcInstance?: LCDClient|null) {
 
         this.lcdcInstance = lcdcInstance ?? null;
-        // this.privateKey = key.derivePath(`m/0/${index}`);
-        // this.derivableAccountKey = key;
         this.derivableAccountKey = key.derivePath(`m/${accountIndex}'`);
-        // this.test = key.derivePath(`m/${accountIndex}'/0/0`).toAddress();
-        // this.test2 = key.derivePath(`m/${accountIndex}'`).derivePath('m/0/0').toAddress();
         this.accountIndex = accountIndex;
     }
     getAddress(index: number=0){
