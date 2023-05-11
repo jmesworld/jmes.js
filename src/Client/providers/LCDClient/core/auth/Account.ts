@@ -5,6 +5,7 @@ import { ContinuousVestingAccount } from './ContinuousVestingAccount';
 import { DelayedVestingAccount } from './DelayedVestingAccount';
 import { PeriodicVestingAccount } from './PeriodicVestingAccount';
 import { BaseVestingAccount } from './BaseVestingAccount';
+import { ForeverVestingAccount } from './ForeverVestingAccount';
 
 export type Account =
   | BaseAccount
@@ -12,6 +13,7 @@ export type Account =
   | LazyGradedVestingAccount
   | ContinuousVestingAccount
   | DelayedVestingAccount
+  | ForeverVestingAccount
   | PeriodicVestingAccount;
 /**
  * Stores information about an account fetched from the blockchain.
@@ -23,6 +25,7 @@ export namespace Account {
     | LazyGradedVestingAccount.Amino
     | ContinuousVestingAccount.Amino
     | DelayedVestingAccount.Amino
+    | ForeverVestingAccount.Amino
     | PeriodicVestingAccount.Amino;
   export type Data =
     | BaseAccount.Data
@@ -30,6 +33,7 @@ export namespace Account {
     | LazyGradedVestingAccount.Data
     | ContinuousVestingAccount.Data
     | DelayedVestingAccount.Data
+    | ForeverVestingAccount.Data
     | PeriodicVestingAccount.Data;
   export type Proto = Any;
 
@@ -50,6 +54,8 @@ export namespace Account {
         return ContinuousVestingAccount.fromAmino(amino, isClassic);
       case 'cosmos-sdk/DelayedVestingAccount':
         return DelayedVestingAccount.fromAmino(amino, isClassic);
+      case 'cosmos-sdk/ForeverVestingAccount':
+        return ForeverVestingAccount.fromAmino(amino, isClassic);
       case 'cosmos-sdk/PeriodicVestingAccount':
         return PeriodicVestingAccount.fromAmino(amino, isClassic);
     }
@@ -67,6 +73,8 @@ export namespace Account {
         return ContinuousVestingAccount.fromData(data, isClassic);
       case '/cosmos.vesting.v1beta1.DelayedVestingAccount':
         return DelayedVestingAccount.fromData(data, isClassic);
+      case '/cosmos.vesting.v1beta1.ForeverVestingAccount':
+        return ForeverVestingAccount.fromData(data, isClassic);
       case '/cosmos.vesting.v1beta1.PeriodicVestingAccount':
         return PeriodicVestingAccount.fromData(data, isClassic);
     }
@@ -85,6 +93,8 @@ export namespace Account {
       return ContinuousVestingAccount.unpackAny(accountAny, isClassic);
     } else if (typeUrl === '/cosmos.vesting.v1beta1.DelayedVestingAccount') {
       return DelayedVestingAccount.unpackAny(accountAny, isClassic);
+    } else if (typeUrl === '/cosmos.vesting.v1beta1.ForeverVestingAccount') {
+      return ForeverVestingAccount.unpackAny(accountAny, isClassic);
     } else if (typeUrl === '/cosmos.vesting.v1beta1.PeriodicVestingAccount') {
       return PeriodicVestingAccount.unpackAny(accountAny, isClassic);
     }

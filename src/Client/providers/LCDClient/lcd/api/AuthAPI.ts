@@ -5,6 +5,7 @@ import {
   DelayedVestingAccount,
   PeriodicVestingAccount,
   ContinuousVestingAccount,
+  ForeverVestingAccount,
   BaseAccount,
 } from '../../core';
 import { BaseAPI } from './BaseAPI';
@@ -35,7 +36,7 @@ export class AuthAPI extends BaseAPI {
   }
   /**
    * Looks up the account information using its Terra account address. If the account has
-   * vesting, it will be one of [LazyGradedVestingAccount, DelayedVestingAccount, PeriodicVestingAccount, ContinuousVestingAccount]
+   * vesting, it will be one of [LazyGradedVestingAccount, DelayedVestingAccount, PeriodicVestingAccount, ContinuousVestingAccount, ForeverVestingAccount]
    *
    * @param address address of account to look up
    */
@@ -49,7 +50,8 @@ export class AuthAPI extends BaseAPI {
         | LazyGradedVestingAccount.Data
         | DelayedVestingAccount.Data
         | PeriodicVestingAccount.Data
-        | ContinuousVestingAccount.Data;
+        | ContinuousVestingAccount.Data
+        | ForeverVestingAccount.Data;
     }>(`/cosmos/auth/v1beta1/accounts/${address}`, params);
     return Account.fromData(account, this.lcd.config.isClassic);
   }

@@ -8,6 +8,7 @@ export * from './LazyGradedVestingAccount';
 export * from './ContinuousVestingAccount';
 export * from './DelayedVestingAccount';
 export * from './PeriodicVestingAccount';
+export * from './ForeverVestingAccount';
 
 // TODO : check whether used or not
 // export function isVesting(
