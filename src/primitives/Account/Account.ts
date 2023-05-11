@@ -44,7 +44,7 @@ export class Account {
 
        return isValid;
     }
-    async getLCDClient(){
+    getLCDClient(){
         return this.lcdcInstance;
     }
 

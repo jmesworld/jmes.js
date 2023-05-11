@@ -104,11 +104,7 @@ var Account = /** @class */ (function () {
         return isValid;
     };
     Account.prototype.getLCDClient = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/, this.lcdcInstance];
-            });
-        });
+        return this.lcdcInstance;
     };
     Account.prototype.getBalance = function (address) {
         return __awaiter(this, void 0, void 0, function () {

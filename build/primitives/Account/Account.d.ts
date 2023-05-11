@@ -12,7 +12,7 @@ export declare class Account {
     getPublic(index?: number): Buffer;
     signMessage(message: any, index?: number): Buffer;
     verifySignature(signature: any, message: any, publicKey: any): boolean;
-    getLCDClient(): Promise<LCDClient | null>;
+    getLCDClient(): LCDClient | null;
     getBalance(address?: string): Promise<Coin>;
     sendTransaction(transactionOpts: {
         recipientAddress: string;
