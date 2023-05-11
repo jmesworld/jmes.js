@@ -25,7 +25,7 @@ interface Async {
     height: number;
     txhash: string;
 }
-export declare type TxBroadcastResult<B extends Wait | Block | Sync | Async, C extends TxSuccess | TxError | {}> = B & C;
+export type TxBroadcastResult<B extends Wait | Block | Sync | Async, C extends TxSuccess | TxError | {}> = B & C;
 export interface TxSuccess {
     logs: TxLog[];
 }
@@ -33,10 +33,10 @@ export interface TxError {
     code: number | string;
     codespace?: string;
 }
-export declare type WaitTxBroadcastResult = TxBroadcastResult<Wait, TxSuccess | TxError>;
-export declare type BlockTxBroadcastResult = TxBroadcastResult<Block, TxSuccess | TxError>;
-export declare type SyncTxBroadcastResult = TxBroadcastResult<Sync, TxError | {}>;
-export declare type AsyncTxBroadcastResult = TxBroadcastResult<Async, {}>;
+export type WaitTxBroadcastResult = TxBroadcastResult<Wait, TxSuccess | TxError>;
+export type BlockTxBroadcastResult = TxBroadcastResult<Block, TxSuccess | TxError>;
+export type SyncTxBroadcastResult = TxBroadcastResult<Sync, TxError | {}>;
+export type AsyncTxBroadcastResult = TxBroadcastResult<Async, {}>;
 export declare function isTxError<T extends TxBroadcastResult<B, C>, B extends Wait | Block | Sync, C extends TxSuccess | TxError | {}>(x: T): x is T & TxBroadcastResult<B, TxError>;
 export declare namespace BlockTxBroadcastResult {
     interface Data {

@@ -8,7 +8,7 @@ export * from './MsgUndelegate';
 export * from './MsgBeginRedelegate';
 export * from './MsgCreateValidator';
 export * from './MsgEditValidator';
-export declare type StakingMsg = MsgDelegate | MsgUndelegate | MsgBeginRedelegate | MsgCreateValidator | MsgEditValidator;
+export type StakingMsg = MsgDelegate | MsgUndelegate | MsgBeginRedelegate | MsgCreateValidator | MsgEditValidator;
 export declare namespace StakingMsg {
     type Amino = MsgDelegate.Amino | MsgUndelegate.Amino | MsgBeginRedelegate.Amino | MsgCreateValidator.Amino | MsgEditValidator.Amino;
     type Data = MsgDelegate.Data | MsgUndelegate.Data | MsgBeginRedelegate.Data | MsgCreateValidator.Data | MsgEditValidator.Data;

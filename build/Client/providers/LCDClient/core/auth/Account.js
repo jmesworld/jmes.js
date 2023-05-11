@@ -7,6 +7,7 @@ var ContinuousVestingAccount_1 = require("./ContinuousVestingAccount");
 var DelayedVestingAccount_1 = require("./DelayedVestingAccount");
 var PeriodicVestingAccount_1 = require("./PeriodicVestingAccount");
 var BaseVestingAccount_1 = require("./BaseVestingAccount");
+var ForeverVestingAccount_1 = require("./ForeverVestingAccount");
 /**
  * Stores information about an account fetched from the blockchain.
  */
@@ -26,6 +27,8 @@ var Account;
                 return ContinuousVestingAccount_1.ContinuousVestingAccount.fromAmino(amino, isClassic);
             case 'cosmos-sdk/DelayedVestingAccount':
                 return DelayedVestingAccount_1.DelayedVestingAccount.fromAmino(amino, isClassic);
+            case 'cosmos-sdk/ForeverVestingAccount':
+                return ForeverVestingAccount_1.ForeverVestingAccount.fromAmino(amino, isClassic);
             case 'cosmos-sdk/PeriodicVestingAccount':
                 return PeriodicVestingAccount_1.PeriodicVestingAccount.fromAmino(amino, isClassic);
         }
@@ -43,6 +46,8 @@ var Account;
                 return ContinuousVestingAccount_1.ContinuousVestingAccount.fromData(data, isClassic);
             case '/cosmos.vesting.v1beta1.DelayedVestingAccount':
                 return DelayedVestingAccount_1.DelayedVestingAccount.fromData(data, isClassic);
+            case '/cosmos.vesting.v1beta1.ForeverVestingAccount':
+                return ForeverVestingAccount_1.ForeverVestingAccount.fromData(data, isClassic);
             case '/cosmos.vesting.v1beta1.PeriodicVestingAccount':
                 return PeriodicVestingAccount_1.PeriodicVestingAccount.fromData(data, isClassic);
         }
@@ -61,6 +66,9 @@ var Account;
         }
         else if (typeUrl === '/cosmos.vesting.v1beta1.DelayedVestingAccount') {
             return DelayedVestingAccount_1.DelayedVestingAccount.unpackAny(accountAny, isClassic);
+        }
+        else if (typeUrl === '/cosmos.vesting.v1beta1.ForeverVestingAccount') {
+            return ForeverVestingAccount_1.ForeverVestingAccount.unpackAny(accountAny, isClassic);
         }
         else if (typeUrl === '/cosmos.vesting.v1beta1.PeriodicVestingAccount') {
             return PeriodicVestingAccount_1.PeriodicVestingAccount.unpackAny(accountAny, isClassic);

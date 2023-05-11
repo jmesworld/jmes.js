@@ -3,7 +3,7 @@ import { DerivableKey } from "../DerivableKey";
 export declare class Mnemonic {
     mnemonic: string;
     private password;
-    static generateMnemonic(overwroteRandomBytes?: null): string;
+    static generateMnemonic(overwroteRandomBytes?: Uint8Array | null): string;
     static mnemonicToSeed(mnemonic: string, password?: string | null): Buffer;
     constructor(mnemonic?: string, password?: string);
     toSeed(): Buffer;

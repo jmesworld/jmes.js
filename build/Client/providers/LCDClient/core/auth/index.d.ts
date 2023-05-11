@@ -5,3 +5,4 @@ export * from './LazyGradedVestingAccount';
 export * from './ContinuousVestingAccount';
 export * from './DelayedVestingAccount';
 export * from './PeriodicVestingAccount';
+export * from './ForeverVestingAccount';

@@ -23,6 +23,7 @@ __exportStar(require("./LazyGradedVestingAccount"), exports);
 __exportStar(require("./ContinuousVestingAccount"), exports);
 __exportStar(require("./DelayedVestingAccount"), exports);
 __exportStar(require("./PeriodicVestingAccount"), exports);
+__exportStar(require("./ForeverVestingAccount"), exports);
 // TODO : check whether used or not
 // export function isVesting(
 //   account: Account

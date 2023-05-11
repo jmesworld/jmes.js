@@ -26,7 +26,7 @@ export declare namespace AuthorizationGrant {
     }
     type Proto = Grant_pb;
 }
-export declare type Authorization = SendAuthorization | GenericAuthorization | StakeAuthorization;
+export type Authorization = SendAuthorization | GenericAuthorization | StakeAuthorization;
 export declare namespace Authorization {
     type Amino = SendAuthorization.Amino | GenericAuthorization.Amino;
     type Data = SendAuthorization.Data | GenericAuthorization.Data | StakeAuthorization.Data;
