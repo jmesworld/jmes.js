@@ -43,25 +43,14 @@ const account = wallet.getAccount();
 // Get an account's Address on jmesxxxx format.  
 const address = account.getAddress();
 
-// Sign and broadcast a transaction
-const signedMessage = wallet.signMessage({});
-const txid = wallet.broadcastSignedMessage(signedMessage);
+const balance = account.getBalance();
 
-// Get feed
-const feed = client.providers.marketplaceAPI.getFeed();
-const item = client.providers.marketplaceAPI.getItem(itemIdentifier);
-const author = client.providers.marketplaceAPI.getAuthor(item.author);
+// Send transaction
+const txResponse = await account.sendTransaction({
+    recipientAddress: "jmes1g2vaept3rxjvfzyfmem5am5x74n4qygq58jy9v",
+    recipientAmount: 172064,
+})
 ```
-
-- `account.getFeed()` - Returns an array of items (nft,...)
-
-- `account.getAuthor({nickname})`
-- `account.getAuthors()`
-- `account.getUser({nickname})`
-
-- `account.mintItem(item)` - Allow to create a new item of type NFT.
-- `account.getItem({id})` - Allow to get a specific item
-- `account.findItem({syntax})`
 
 ## Usage on React-Native
 
