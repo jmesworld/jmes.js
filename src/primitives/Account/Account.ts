@@ -49,10 +49,11 @@ export class Account {
     }
 
     async getBalance(address?: string){
-        const lcdClient = await this.getLCDClient();
+        const lcdClient = this.getLCDClient();
         if (!lcdClient) throw new Error('LCDClient not initialized');
         try {
-            const [balance] = await lcdClient.bank.balance(address ?? this.getAddress());
+            const balanceAddress = address ?? this.getAddress();
+            const [balance] = await lcdClient.bank.balance(balanceAddress);
             return balance.get('ujmes') || new Coin("ujmes", 0)
         } catch (e){
             console.log(e);
@@ -81,7 +82,7 @@ export class Account {
             //@ts-ignore
             .createAndSignTx(txOpts)
             //@ts-ignore
-            .then(tx => lcdc.tx.broadcast(tx))
+            .then(tx => lcdClient.tx.broadcast(tx))
             //@ts-ignore
             .then(result => {
                 console.log(`TX hash: ${result.txhash}`);

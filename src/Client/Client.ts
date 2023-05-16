@@ -54,6 +54,6 @@ export class Client {
 
         // @ts-ignore
         const chainDerivedKey = derivableKey.derivePath(bip44Path);
-        return  new Wallet(chainDerivedKey, this.providers.LCDC);
+        return new Wallet(chainDerivedKey, this.providers.LCDC);
     }
 }

@@ -108,26 +108,26 @@ var Account = /** @class */ (function () {
     };
     Account.prototype.getBalance = function (address) {
         return __awaiter(this, void 0, void 0, function () {
-            var lcdClient, balance, e_1;
+            var lcdClient, balanceAddress, balance, e_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.getLCDClient()];
-                    case 1:
-                        lcdClient = _a.sent();
+                    case 0:
+                        lcdClient = this.getLCDClient();
                         if (!lcdClient)
                             throw new Error('LCDClient not initialized');
-                        _a.label = 2;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        balanceAddress = address !== null && address !== void 0 ? address : this.getAddress();
+                        return [4 /*yield*/, lcdClient.bank.balance(balanceAddress)];
                     case 2:
-                        _a.trys.push([2, 4, , 5]);
-                        return [4 /*yield*/, lcdClient.bank.balance(address !== null && address !== void 0 ? address : this.getAddress())];
-                    case 3:
                         balance = (_a.sent())[0];
                         return [2 /*return*/, balance.get('ujmes') || new core_1.Coin("ujmes", 0)];
-                    case 4:
+                    case 3:
                         e_1 = _a.sent();
                         console.log(e_1);
                         throw e_1;
-                    case 5: return [2 /*return*/];
+                    case 4: return [2 /*return*/];
                 }
             });
         });
@@ -153,7 +153,7 @@ var Account = /** @class */ (function () {
                                 //@ts-ignore
                                 .createAndSignTx(txOpts)
                                 //@ts-ignore
-                                .then(function (tx) { return lcdc.tx.broadcast(tx); })
+                                .then(function (tx) { return lcdClient.tx.broadcast(tx); })
                                 //@ts-ignore
                                 .then(function (result) {
                                 console.log("TX hash: ".concat(result.txhash));
