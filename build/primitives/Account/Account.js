@@ -166,6 +166,39 @@ var Account = /** @class */ (function () {
             });
         });
     };
+    /**
+     * Allow to withdraw delegator or validator rewards given an address and set of validators
+     * @param address
+     * @param validators
+     * @param type=[delegator|validator]
+     */
+    Account.prototype.withdrawRewards = function (address, validators, type) {
+        if (type === void 0) { type = 'delegator'; }
+        return __awaiter(this, void 0, void 0, function () {
+            var lcdClient, msgs, _i, validators_1, validator, msg, wallet, signedTx;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.getLCDClient()];
+                    case 1:
+                        lcdClient = _a.sent();
+                        if (!lcdClient)
+                            return [2 /*return*/, null];
+                        msgs = [];
+                        for (_i = 0, validators_1 = validators; _i < validators_1.length; _i++) {
+                            validator = validators_1[_i];
+                            msg = (type === 'delegator') ? new core_1.MsgWithdrawDelegatorReward(address, validator) : new core_1.MsgWithdrawValidatorCommission(validator);
+                            msgs.push(msg);
+                        }
+                        wallet = lcdClient.wallet(new key_1.RawKey(this.getPrivate()));
+                        return [4 /*yield*/, wallet
+                                .createAndSignTx({ msgs: msgs })];
+                    case 2:
+                        signedTx = _a.sent();
+                        return [2 /*return*/, lcdClient.tx.broadcast(signedTx)];
+                }
+            });
+        });
+    };
     return Account;
 }());
 exports.Account = Account;

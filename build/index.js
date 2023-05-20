@@ -26,8 +26,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Core = void 0;
+exports.Key = exports.Core = void 0;
 __exportStar(require("./Client"), exports);
 __exportStar(require("./primitives"), exports);
 exports.Core = __importStar(require("./Client/providers/LCDClient/core"));
+exports.Key = __importStar(require("./Client/providers/LCDClient/key"));
 //# sourceMappingURL=index.js.map

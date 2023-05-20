@@ -19,4 +19,11 @@ export declare class Account {
         recipientAmount: number;
         memo?: string;
     }): any;
+    /**
+     * Allow to withdraw delegator or validator rewards given an address and set of validators
+     * @param address
+     * @param validators
+     * @param type=[delegator|validator]
+     */
+    withdrawRewards(address: string, validators: [any], type?: string): Promise<import("../../Client/providers/LCDClient/lcd/api").WaitTxBroadcastResult | null>;
 }

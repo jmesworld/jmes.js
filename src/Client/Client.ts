@@ -56,4 +56,27 @@ export class Client {
         const chainDerivedKey = derivableKey.derivePath(bip44Path);
         return new Wallet(chainDerivedKey, this.providers.LCDC);
     }
+
+    public async getSupply(denom: string = "ujmes"){
+        const total = await this.providers.LCDC.bank.total();
+        return total[0].get(denom);
+    }
+
+    public async getValidatorInfo(validatorAddress: string){
+        if(!validatorAddress) return null;
+
+        const commission = await this.providers.LCDC.distribution.validatorCommission(validatorAddress)
+        const validator = {
+            rewards: {
+                commission: commission.get('ujmes')
+            },
+            ...await this.providers.LCDC.staking.validator(validatorAddress)
+        };
+
+        return validator;
+    }
+
+    public async getValidators(params = {}){
+        return this.providers.LCDC.staking.validators(params);
+    }
 }

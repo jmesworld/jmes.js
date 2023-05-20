@@ -1,6 +1,11 @@
 import {DerivableKey} from "../DerivableKey";
 import * as elliptic from "elliptic";
-import {MsgSend, Coin} from "../../Client/providers/LCDClient/core";
+import {
+    MsgSend,
+    Coin,
+    MsgWithdrawDelegatorReward,
+    MsgWithdrawValidatorCommission
+} from "../../Client/providers/LCDClient/core";
 import {RawKey} from "../../Client/providers/LCDClient/key";
 import {LCDClient} from "../../Client/providers/LCDClient/lcd/LCDClient";
 
@@ -91,5 +96,29 @@ export class Account {
                 // console.log(e);
                 throw e;
             });
+    }
+
+
+    /**
+     * Allow to withdraw delegator or validator rewards given an address and set of validators
+     * @param address
+     * @param validators
+     * @param type=[delegator|validator]
+     */
+    async withdrawRewards(address: string, validators: [any], type: string = 'delegator') {
+        const lcdClient = await this.getLCDClient();
+        if (!lcdClient) return null;
+
+        const msgs = [];
+        for (let validator of validators) {
+            let msg = (type === 'delegator') ? new MsgWithdrawDelegatorReward(address, validator) : new MsgWithdrawValidatorCommission(validator);
+            msgs.push(msg);
+        }
+        const wallet = lcdClient.wallet(new RawKey(this.getPrivate()))
+
+        const signedTx = await wallet
+            .createAndSignTx({msgs})
+
+        return lcdClient.tx.broadcast(signedTx)
     }
 };
