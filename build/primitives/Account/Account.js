@@ -165,7 +165,7 @@ var Account = /** @class */ (function () {
                 }
                 URL = lcdcUrl !== null && lcdcUrl !== void 0 ? lcdcUrl : 'http://64.92.191.45:1317';
                 lcdc = new LCDClient_1.LCDClient({
-                    chainID: 'jmes-testnet-1',
+                    chainID: chainId,
                     // chainID: 'testing',
                     URL: URL,
                     isClassic: true,
