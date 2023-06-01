@@ -166,14 +166,39 @@ var Account = /** @class */ (function () {
             });
         });
     };
+    Account.prototype.withdrawCommission = function (validator) {
+        return __awaiter(this, void 0, void 0, function () {
+            var lcdClient, fee, msg, wallet, signedTx;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.getLCDClient()];
+                    case 1:
+                        lcdClient = _a.sent();
+                        if (!lcdClient)
+                            return [2 /*return*/, null];
+                        fee = new core_1.Fee(0, new core_1.Coins({ ujmes: 0 }));
+                        msg = new core_1.MsgWithdrawValidatorCommission(validator);
+                        wallet = lcdClient.wallet(new key_1.RawKey(this.getPrivate()));
+                        return [4 /*yield*/, wallet
+                                //@ts-ignore
+                                .createAndSignTx({ msgs: [msg] }, fee)
+                            // .createAndSignTx({msgs: [msg]}, fee)
+                        ];
+                    case 2:
+                        signedTx = _a.sent();
+                        // .createAndSignTx({msgs: [msg]}, fee)
+                        return [2 /*return*/, lcdClient.tx.broadcast(signedTx)];
+                }
+            });
+        });
+    };
     /**
-     * Allow to withdraw delegator or validator rewards given an address and set of validators
+     * Allow to withdraw delegator rewards given an address and set of validators
      * @param address
      * @param validators
      * @param type=[delegator|validator]
      */
-    Account.prototype.withdrawRewards = function (address, validators, type) {
-        if (type === void 0) { type = 'delegator'; }
+    Account.prototype.withdrawRewards = function (address, validators) {
         return __awaiter(this, void 0, void 0, function () {
             var lcdClient, msgs, _i, validators_1, validator, msg, wallet, signedTx;
             return __generator(this, function (_a) {
@@ -186,9 +211,53 @@ var Account = /** @class */ (function () {
                         msgs = [];
                         for (_i = 0, validators_1 = validators; _i < validators_1.length; _i++) {
                             validator = validators_1[_i];
-                            msg = (type === 'delegator') ? new core_1.MsgWithdrawDelegatorReward(address, validator) : new core_1.MsgWithdrawValidatorCommission(validator);
+                            msg = new core_1.MsgWithdrawDelegatorReward(address, validator);
                             msgs.push(msg);
                         }
+                        wallet = lcdClient.wallet(new key_1.RawKey(this.getPrivate()));
+                        return [4 /*yield*/, wallet
+                                .createAndSignTx({ msgs: msgs })];
+                    case 2:
+                        signedTx = _a.sent();
+                        return [2 /*return*/, lcdClient.tx.broadcast(signedTx)];
+                }
+            });
+        });
+    };
+    Account.prototype.delegateTokens = function (validatorAddress, amount) {
+        return __awaiter(this, void 0, void 0, function () {
+            var lcdClient, msg, msgs, wallet, signedTx;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.getLCDClient()];
+                    case 1:
+                        lcdClient = _a.sent();
+                        if (!lcdClient)
+                            return [2 /*return*/, null];
+                        msg = new core_1.MsgDelegate(this.getAddress(), validatorAddress, amount);
+                        msgs = [msg];
+                        wallet = lcdClient.wallet(new key_1.RawKey(this.getPrivate()));
+                        return [4 /*yield*/, wallet
+                                .createAndSignTx({ msgs: msgs })];
+                    case 2:
+                        signedTx = _a.sent();
+                        return [2 /*return*/, lcdClient.tx.broadcast(signedTx)];
+                }
+            });
+        });
+    };
+    Account.prototype.undelegateTokens = function (validatorAddress, amount) {
+        return __awaiter(this, void 0, void 0, function () {
+            var lcdClient, msg, msgs, wallet, signedTx;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.getLCDClient()];
+                    case 1:
+                        lcdClient = _a.sent();
+                        if (!lcdClient)
+                            return [2 /*return*/, null];
+                        msg = new core_1.MsgUndelegate(this.getAddress(), validatorAddress, amount);
+                        msgs = [msg];
                         wallet = lcdClient.wallet(new key_1.RawKey(this.getPrivate()));
                         return [4 /*yield*/, wallet
                                 .createAndSignTx({ msgs: msgs })];

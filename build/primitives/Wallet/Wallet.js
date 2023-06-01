@@ -11,12 +11,6 @@ var Wallet = /** @class */ (function () {
         if (index === void 0) { index = 0; }
         return new Account_1.Account(this.chainDerivedKey, index, this.lcdcInstance);
     };
-    Wallet.prototype.signMessage = function (message) {
-        console.log({ message: message });
-    };
-    Wallet.prototype.broadcastSignedMessage = function (signedMessage) {
-        console.log({ signedMessage: signedMessage });
-    };
     return Wallet;
 }());
 exports.Wallet = Wallet;

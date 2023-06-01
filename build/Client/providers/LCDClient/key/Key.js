@@ -143,7 +143,6 @@ var Key = /** @class */ (function () {
                         return [4 /*yield*/, this.sign(Buffer.from(signDoc.toBytes(isClassic)))];
                     case 1:
                         sigBytes = (_a.sent()).toString('base64');
-                        console.log({ sigBytes: sigBytes });
                         // restore signDoc to origin
                         signDoc.auth_info.signer_infos = signerInfos;
                         return [2 /*return*/, new SignatureV2_1.SignatureV2(this.publicKey, new SignatureV2_1.SignatureV2.Descriptor(new SignatureV2_1.SignatureV2.Descriptor.Single(signing_1.SignMode.SIGN_MODE_DIRECT, sigBytes)), signDoc.sequence)];

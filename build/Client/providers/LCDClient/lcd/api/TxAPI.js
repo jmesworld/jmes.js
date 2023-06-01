@@ -312,15 +312,10 @@ var TxAPI = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        console.log(JSON.stringify({
-                            tx: tx,
+                    case 0: return [4 /*yield*/, this.c.post("/cosmos/tx/v1beta1/txs", {
+                            tx_bytes: this.encode(tx),
                             mode: mode,
-                        }));
-                        return [4 /*yield*/, this.c.post("/cosmos/tx/v1beta1/txs", {
-                                tx_bytes: this.encode(tx),
-                                mode: mode,
-                            })];
+                        })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });

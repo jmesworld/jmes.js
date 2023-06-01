@@ -13,12 +13,4 @@ export class Wallet {
     getAccount(index:number=0){
         return new Account(this.chainDerivedKey, index, this.lcdcInstance);
     }
-
-    signMessage(message: any){
-        console.log({message});
-    }
-
-    broadcastSignedMessage(signedMessage: any){
-        console.log({signedMessage});
-    }
 };

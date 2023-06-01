@@ -122,7 +122,6 @@ export abstract class Key {
       await this.sign(Buffer.from(signDoc.toBytes(isClassic)))
     ).toString('base64');
 
-    console.log({sigBytes});
     // restore signDoc to origin
     signDoc.auth_info.signer_infos = signerInfos;
 

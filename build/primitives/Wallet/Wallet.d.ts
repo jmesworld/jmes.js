@@ -6,6 +6,4 @@ export declare class Wallet {
     lcdcInstance: LCDClient | null;
     constructor(chainDerivedKey: DerivableKey, lcdcInstance?: LCDClient);
     getAccount(index?: number): Account;
-    signMessage(message: any): void;
-    broadcastSignedMessage(signedMessage: any): void;
 }

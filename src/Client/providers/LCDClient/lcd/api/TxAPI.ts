@@ -402,10 +402,6 @@ export class TxAPI extends BaseAPI {
     tx: Tx,
     mode: keyof typeof BroadcastModeV1 | BroadcastModeV2
   ): Promise<T> {
-    console.log(JSON.stringify({
-      tx,
-      mode,
-    }));
     return await this.c.post<any>(`/cosmos/tx/v1beta1/txs`, {
       tx_bytes: this.encode(tx),
       mode,
