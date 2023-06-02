@@ -35,7 +35,7 @@ export namespace DistributionParams {
 }
 
 /**
- * Holds the resonse of delegator rewards query
+ * Holds the response of delegator rewards query
  */
 export interface Rewards {
   /**

@@ -19,4 +19,14 @@ export declare class Account {
         recipientAmount: number;
         memo?: string;
     }): any;
+    withdrawCommission(validator: string): Promise<import("../../Client/providers/LCDClient/lcd/api").WaitTxBroadcastResult | null>;
+    /**
+     * Allow to withdraw delegator rewards given an address and set of validators
+     * @param address
+     * @param validators
+     * @param type=[delegator|validator]
+     */
+    withdrawRewards(address: string, validators: [any]): Promise<import("../../Client/providers/LCDClient/lcd/api").WaitTxBroadcastResult | null>;
+    delegateTokens(validatorAddress: string, amount: Coin): Promise<import("../../Client/providers/LCDClient/lcd/api").WaitTxBroadcastResult | null>;
+    undelegateTokens(validatorAddress: string, amount: Coin): Promise<import("../../Client/providers/LCDClient/lcd/api").WaitTxBroadcastResult | null>;
 }

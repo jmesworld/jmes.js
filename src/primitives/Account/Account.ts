@@ -1,6 +1,11 @@
 import {DerivableKey} from "../DerivableKey";
 import * as elliptic from "elliptic";
-import {MsgSend, Coin} from "../../Client/providers/LCDClient/core";
+import {
+    MsgSend,
+    Coin,
+    MsgWithdrawDelegatorReward,
+    MsgWithdrawValidatorCommission, Fee, Coins, MsgDelegate, MsgUndelegate
+} from "../../Client/providers/LCDClient/core";
 import {RawKey} from "../../Client/providers/LCDClient/key";
 import {LCDClient} from "../../Client/providers/LCDClient/lcd/LCDClient";
 
@@ -91,5 +96,73 @@ export class Account {
                 // console.log(e);
                 throw e;
             });
+    }
+
+    async withdrawCommission(validator: string) {
+        const lcdClient = await this.getLCDClient();
+        if (!lcdClient) return null;
+
+        const fee = new Fee(0, new Coins({ujmes: 0}));
+
+        const msg = new MsgWithdrawValidatorCommission(validator);
+        const wallet = lcdClient.wallet(new RawKey(this.getPrivate()))
+
+        const signedTx = await wallet
+            //@ts-ignore
+            .createAndSignTx({msgs: [msg]}, fee)
+            // .createAndSignTx({msgs: [msg]}, fee)
+
+        return lcdClient.tx.broadcast(signedTx)
+    }
+
+    /**
+     * Allow to withdraw delegator rewards given an address and set of validators
+     * @param address
+     * @param validators
+     * @param type=[delegator|validator]
+     */
+    async withdrawRewards(address: string, validators: [any]) {
+        const lcdClient = await this.getLCDClient();
+        if (!lcdClient) return null;
+
+        const msgs = [];
+        for (let validator of validators) {
+            let msg = new MsgWithdrawDelegatorReward(address, validator);
+            msgs.push(msg);
+        }
+        const wallet = lcdClient.wallet(new RawKey(this.getPrivate()))
+
+        const signedTx = await wallet
+            .createAndSignTx({msgs})
+
+        return lcdClient.tx.broadcast(signedTx)
+    }
+    async delegateTokens(validatorAddress: string, amount: Coin){
+        const lcdClient = await this.getLCDClient();
+        if (!lcdClient) return null;
+
+        let msg = new MsgDelegate(this.getAddress(), validatorAddress, amount);
+        const msgs = [msg];
+
+        const wallet = lcdClient.wallet(new RawKey(this.getPrivate()))
+
+        const signedTx = await wallet
+            .createAndSignTx({msgs})
+
+        return lcdClient.tx.broadcast(signedTx)
+    }
+    async undelegateTokens(validatorAddress: string, amount: Coin){
+        const lcdClient = await this.getLCDClient();
+        if (!lcdClient) return null;
+
+        let msg = new MsgUndelegate(this.getAddress(), validatorAddress, amount);
+        const msgs = [msg];
+
+        const wallet = lcdClient.wallet(new RawKey(this.getPrivate()))
+
+        const signedTx = await wallet
+            .createAndSignTx({msgs})
+
+        return lcdClient.tx.broadcast(signedTx)
     }
 };

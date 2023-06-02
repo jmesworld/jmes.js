@@ -97,7 +97,6 @@ var Wallet = /** @class */ (function () {
                     case 2:
                         options.sequence = sequence;
                         options.accountNumber = accountNumber;
-                        console.log(this.lcd.config.chainID);
                         return [4 /*yield*/, this.createTx(options)];
                     case 3:
                         tx = _a.sent();

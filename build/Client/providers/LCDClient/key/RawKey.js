@@ -94,7 +94,6 @@ var RawKey = /** @class */ (function (_super) {
         return _this;
     }
     RawKey.prototype.ecdsaSign = function (payload) {
-        console.log({ payload: payload });
         var ec = new elliptic.ec('secp256k1');
         var key = ec.keyFromPrivate(this.privateKey);
         var hash = Uint8Array.from(Buffer.from(jscrypto_1.SHA256.hash(new jscrypto_1.Word32Array(payload)).toString(), 'hex'));

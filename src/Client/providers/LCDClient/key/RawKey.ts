@@ -21,7 +21,6 @@ export class RawKey extends Key {
   }
 
   public ecdsaSign(payload: Buffer): { signature: Uint8Array; recid: number }  {
-    console.log({payload})
     const ec = new elliptic.ec('secp256k1');
     const key = ec.keyFromPrivate(this.privateKey);
     const hash = Uint8Array.from(Buffer.from(

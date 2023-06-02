@@ -73,8 +73,6 @@ export class Wallet {
     options.sequence = sequence;
     options.accountNumber = accountNumber;
 
-    console.log(this.lcd.config.chainID);
-
     const tx = await this.createTx(options); // don't need isClassic because lcd already have it
     return this.key.signTx(
       tx,
