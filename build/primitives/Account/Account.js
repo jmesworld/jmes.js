@@ -132,6 +132,32 @@ var Account = /** @class */ (function () {
             });
         });
     };
+    Account.prototype.getVotingRights = function (address) {
+        return __awaiter(this, void 0, void 0, function () {
+            var lcdClient, balanceAddress, balance, e_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        lcdClient = this.getLCDClient();
+                        if (!lcdClient)
+                            throw new Error('LCDClient not initialized');
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        balanceAddress = address !== null && address !== void 0 ? address : this.getAddress();
+                        return [4 /*yield*/, lcdClient.bank.balance(balanceAddress)];
+                    case 2:
+                        balance = (_a.sent())[0];
+                        return [2 /*return*/, balance.get('bujmes') || new core_1.Coin("bujmes", 0)];
+                    case 3:
+                        e_2 = _a.sent();
+                        console.log(e_2);
+                        throw e_2;
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
     // @ts-ignore
     Account.prototype.sendTransaction = function (transactionOpts) {
         return __awaiter(this, void 0, void 0, function () {

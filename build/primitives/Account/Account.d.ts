@@ -14,6 +14,7 @@ export declare class Account {
     verifySignature(signature: any, message: any, publicKey: any): boolean;
     getLCDClient(): LCDClient | null;
     getBalance(address?: string): Promise<Coin>;
+    getVotingRights(address?: string): Promise<Coin>;
     sendTransaction(transactionOpts: {
         recipientAddress: string;
         recipientAmount: number;

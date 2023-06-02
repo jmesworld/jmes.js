@@ -65,6 +65,19 @@ export class Account {
             throw e
         }
     }
+
+    async getVotingRights(address?: string){
+        const lcdClient = this.getLCDClient();
+        if (!lcdClient) throw new Error('LCDClient not initialized');
+        try {
+            const balanceAddress = address ?? this.getAddress();
+            const [balance] = await lcdClient.bank.balance(balanceAddress);
+            return balance.get('bujmes') || new Coin("bujmes", 0)
+        } catch (e){
+            console.log(e);
+            throw e
+        }
+    }
     // @ts-ignore
     async sendTransaction(transactionOpts:{recipientAddress: string, recipientAmount:number, memo?: string}): any{
         // create a simple message that moves coin balances
