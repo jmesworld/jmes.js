@@ -6,7 +6,7 @@ import { DelayedVestingAccount } from './DelayedVestingAccount';
 import { PeriodicVestingAccount } from './PeriodicVestingAccount';
 import { BaseVestingAccount } from './BaseVestingAccount';
 import { ForeverVestingAccount } from './ForeverVestingAccount';
-export type Account = BaseAccount | BaseVestingAccount | LazyGradedVestingAccount | ContinuousVestingAccount | DelayedVestingAccount | ForeverVestingAccount | PeriodicVestingAccount;
+export declare type Account = BaseAccount | BaseVestingAccount | LazyGradedVestingAccount | ContinuousVestingAccount | DelayedVestingAccount | ForeverVestingAccount | PeriodicVestingAccount;
 /**
  * Stores information about an account fetched from the blockchain.
  */

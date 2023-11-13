@@ -20,7 +20,7 @@ export default class IdentityAPI {
 
     constructor(config?: IdentityAPIConfig) {
         this.endpoint = {
-            api_url: config?.endpoint?.api_url ?? 'http://51.38.52.37:3001'
+            api_url: config?.endpoint?.api_url ?? 'http://87.98.243.34:3001'
         }
     }
 };

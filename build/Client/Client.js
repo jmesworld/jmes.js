@@ -25,7 +25,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (g && (g = 0, op[0] && (_ = 0)), _) try {
+        while (_) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -61,10 +61,8 @@ var Client = /** @class */ (function () {
     function Client(config) {
         var _a, _b, _c, _d, _e;
         var lcdcConfig = (_b = (_a = config === null || config === void 0 ? void 0 : config.providers) === null || _a === void 0 ? void 0 : _a.LCDC) !== null && _b !== void 0 ? _b : {
-            chainID: 'jmes-888',
-            URL: 'http://51.38.52.37:1317',
-            // Refers to the difference introduced with Phoenix-1 vs Columbus-6
-            // on /cosmos/ pathing on MsgInstantiateContract
+            chainID: 'jmes-picasso',
+            URL: 'http://51.91.75.10:1317',
             isClassic: false,
         };
         // Specific provider to external services

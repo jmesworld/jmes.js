@@ -15,7 +15,7 @@
         );
 
         window.sendTransaction = async () => {
-            const wallet = await client.createWallet(mnemonic, "http://51.38.52.37:1888") ;
+            const wallet = await client.createWallet(mnemonic, "http://87.98.243.34:1888") ;
             const account = await wallet.getAccount();
 
             console.log('account', account);
@@ -25,7 +25,7 @@
                     recipientAddress: "jmes1jg4hs0qnytzl873zme2hp378na64z2e75v8xn7",
                     recipientAmount: 200,
                 },
-                "http://51.38.52.37:1888"
+                "http://87.98.243.34:1888"
             );
             console.log({ res });
             return res;

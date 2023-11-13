@@ -25,10 +25,8 @@ export class Client {
 
     constructor(config?: ClientConfig) {
         const lcdcConfig = config?.providers?.LCDC ?? {
-            chainID: 'jmes-888',
-            URL: 'http://51.38.52.37:1317',
-            // Refers to the difference introduced with Phoenix-1 vs Columbus-6
-            // on /cosmos/ pathing on MsgInstantiateContract
+            chainID: 'jmes-picasso',
+            URL: 'http://51.91.75.10:1317',
             isClassic: false,
         };
 

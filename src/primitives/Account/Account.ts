@@ -92,7 +92,7 @@ export class Account {
             txOpts.memo = transactionOpts.memo;
         }
 
-        // const URL = lcdcUrl ?? 'http://51.38.52.37:1317';
+        // const URL = lcdcUrl ?? 'http://87.98.243.34:1317';
         const lcdClient = await this.getLCDClient();
 
         // @ts-ignore
@@ -123,7 +123,6 @@ export class Account {
         const signedTx = await wallet
             //@ts-ignore
             .createAndSignTx({msgs: [msg]}, fee)
-            // .createAndSignTx({msgs: [msg]}, fee)
 
         return lcdClient.tx.broadcast(signedTx)
     }

@@ -1,13 +1,13 @@
 /** `jmes-` prefixed account address */
-export type AccAddress = string;
+export declare type AccAddress = string;
 /** `jmesvaloper-` prefixed validator operator address */
-export type ValAddress = string;
+export declare type ValAddress = string;
 /** `jmesvalcons-` prefixed validator consensus address */
-export type ValConsAddress = string;
+export declare type ValConsAddress = string;
 /** `jmespub-` prefixed account public key */
-export type AccPubKey = string;
+export declare type AccPubKey = string;
 /** `jmesvaloperpub-` prefixed validator public key */
-export type ValPubKey = string;
+export declare type ValPubKey = string;
 export declare namespace AccAddress {
     /**
      * Checks if a string is a valid jmes account address.

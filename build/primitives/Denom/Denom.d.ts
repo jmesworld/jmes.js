@@ -1,4 +1,4 @@
-export type Denom = string;
+export declare type Denom = string;
 export declare namespace Denom {
     const JMES = "ujmes";
     const USD = "uusd";

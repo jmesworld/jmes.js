@@ -17,7 +17,7 @@ export default class FaucetAPI {
     constructor(config?: FaucetAPIConfig) {
 
         this.endpoint = {
-            api_url: config?.endpoint?.api_url ?? 'http://51.38.52.37:3002'
+            api_url: config?.endpoint?.api_url ?? 'http://87.98.243.34:3002'
         }
     }
 };

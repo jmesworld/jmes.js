@@ -31,8 +31,8 @@ export default class MarketplaceAPI {
     public endpoint: { api_url: string, images_url: string };
     constructor(config?: MarketplaceAPIConfig) {
         this.endpoint = {
-            api_url: config?.endpoint?.api_url ?? 'http://51.38.52.37:3001',
-            images_url: config?.endpoint?.images_url ?? 'http://51.38.52.37:3001/images'
+            api_url: config?.endpoint?.api_url ?? 'http://87.98.243.34:3001',
+            images_url: config?.endpoint?.images_url ?? 'http://87.98.243.34:3001/images'
         }
     }
 };
